@@ -8,7 +8,7 @@
     "license": "GPL-1.0-or-later",
     "require": {
         "flarum/core": "^1.2.0",
-        "mattoid/flarum-ext-store": "@dev"
+        "mattoid/flarum-ext-store": "*"
     },
     "authors": [
         {

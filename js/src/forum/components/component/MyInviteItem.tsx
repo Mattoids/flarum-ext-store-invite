@@ -87,13 +87,15 @@ export default class MyInviteItem extends Component {
         m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-link') + ': '),
           m('span', LinkButton.component({
-            href: this.inviteData.link
+            href: this.inviteData.link,
+            target: '_blank'
           }, this.inviteData.link)),
         ]),
         m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-link-2') + ': '),
           m('span', LinkButton.component({
-            href: this.inviteData.link2
+            href: this.inviteData.link2,
+            target: '_blank'
           }, this.inviteData.link2))
         ]),
         m('div.spacing', [

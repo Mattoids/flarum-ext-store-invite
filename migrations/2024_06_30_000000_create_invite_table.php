@@ -19,7 +19,7 @@ return Migration::createTable(
         $table->integer('confirm_user_id')->comment('审核人员');
         $table->text('confirm_remark')->comment('审核意见');
         $table->dateTime('confirm_time')->comment('审核时间');
-        $table->string('invite_code')->comment('邀请码');
+        $table->string('invite_code')->comment('邀请码')->unique();
 
         // created_at & updated_at
         $table->timestamps();

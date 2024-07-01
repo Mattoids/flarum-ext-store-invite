@@ -22,7 +22,7 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       href: app.route('myInvitePage', {
         username: this.user.slug(),
       }),
-      icon: 'fas fa-money-bill',
+      icon: 'fas fa-check-square',
     }, app.translator.trans('mattoid-store-invite.forum.my-invite')));
   });
 
@@ -33,7 +33,7 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
 
     items.add('invite', LinkButton.component({
       href: app.route('invite'),
-      icon: 'fas fa-store',
+      icon: 'fas fa-calendar-check',
     }, app.translator.trans('mattoid-store-invite.forum.invite')));
   });
 });

@@ -22,6 +22,7 @@ use Mattoid\StoreInvite\Goods\InviteValidate;
 use Mattoid\StoreInvite\Listeners\InviteListeners;
 use Mattoid\StoreInvite\Listeners\StoreInviteListeners;
 use Flarum\Api\Serializer\BasicUserSerializer;
+use Mattoid\StoreInvite\Middleware\RegistrationInterceptMiddleware;
 
 return [
     (new Extend\Frontend('forum'))
@@ -33,6 +34,9 @@ return [
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
     new Extend\Locales(__DIR__.'/locale'),
+
+    (new Extend\Middleware("api"))
+        ->add(RegistrationInterceptMiddleware::class),
 
     (new StoreExtend('invite'))
         ->addStoreGoods(InviteGoods::class)

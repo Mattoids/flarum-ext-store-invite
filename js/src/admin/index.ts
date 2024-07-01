@@ -10,6 +10,20 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: 0
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.inconsistency.email',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.inconsistency-email-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.inconsistency-email'),
+      type: 'switch',
+      default: 0
+    })
+    .registerSetting({
+      setting: 'mattoid-store-invite.inconsistency.username',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.inconsistency-username-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.inconsistency-username'),
+      type: 'switch',
+      default: 0
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.calm-down-period',
       help: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period'),
