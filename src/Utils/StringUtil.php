@@ -1,6 +1,6 @@
 <?php
 
-namespace Mattoid\Store\Utils;
+namespace Mattoid\StoreInvite\Utils;
 
 class StringUtil
 {
@@ -36,5 +36,20 @@ class StringUtil
             }
         }
         return $result;
+    }
+
+    /**
+     * 生成邀请码
+     */
+    public static function getInviteCode($userId)
+    {
+        $rand_str = sprintf(
+            '%s%s%04d%s',
+            bin2hex(random_bytes(1)), // 前缀随机数
+            base_convert(time() - 1645539742, 10, 16), // 当前时间 - 2022-02-22 22:22:22
+            base_convert($userId, 10, 16),    // 用户 ID 5 位数应该够用了
+            bin2hex(random_bytes(2)), // 后随机数
+        );
+        return strtoupper(base_convert($rand_str, 16, 36));
     }
 }

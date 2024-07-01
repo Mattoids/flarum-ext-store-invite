@@ -24,6 +24,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: ''
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.mail.title',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.mail-title-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.mail-title'),
+      type: 'text',
+      default: ''
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.mail',
       help: app.translator.trans('mattoid-store-invite.admin.settings.mail-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.mail'),

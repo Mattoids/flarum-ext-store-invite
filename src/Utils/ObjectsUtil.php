@@ -1,6 +1,6 @@
 <?php
 
-namespace Mattoid\Store\Utils;
+namespace Mattoid\StoreInvite\Utils;
 
 class ObjectsUtil
 {

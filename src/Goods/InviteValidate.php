@@ -45,10 +45,9 @@ class InviteValidate extends Validate
         }
 
         // 受邀人是否存在
-        $user = User::query()->where('email', $params['email'])->where('second_email', $params['email'])->first();
+        $user = User::query()->where('email', $params['email'])->orWhere('second_email', $params['email'])->first();
         if ($user) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
-
         }
 
         // 会员活跃度

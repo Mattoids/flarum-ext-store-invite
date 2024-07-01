@@ -11,6 +11,8 @@ mattoid-store-invite:
       price-help: 审核通过时扣除资金
       mail: 邮件模板
       mail-help: 发送给受邀人的邮件内容
+      mail-title: 邮件标题
+      mail-title-help: 受邀人收到邮件的标题内容
 
   forum:
     title: 邀请码
@@ -30,12 +32,16 @@ mattoid-store-invite:
     confirm-adopt: 通过
     confirm-refuse: 拒绝
 
+    mail:
+      send-invite-title: 邀请码
+
     error:
       unaudited: 您有未审核的申请信息，暂时无法继续申请
       review-failed: 您近期有被拒绝的申请信息，请于【{date}】后再行尝试
       invite-not-exist: 申请信息已审核或不存在，请刷新页面后重试
       user-balance-low: 用户余额不足
       email-exist: 受邀人邮箱已存在
+      lock-resources: 当前资源被锁定，请稍后重试
 
   lib:
     item-user: 发邀人

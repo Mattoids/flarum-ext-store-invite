@@ -16,8 +16,10 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Mattoid\StoreInvite\Event\InviteEvent;
 use Mattoid\StoreInvite\Model\InviteModel;
 use Mattoid\StoreInvite\Serializer\InviteSerializer;
+use Mattoid\StoreInvite\Utils\StringUtil;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
+use Illuminate\Contracts\Cache\Repository as CacheContract;
 
 class EditInviteConfirmController extends AbstractListController
 {
@@ -27,11 +29,13 @@ class EditInviteConfirmController extends AbstractListController
     protected $translator;
     protected $settings;
     protected $events;
+    protected $cache;
 
 
-    public function __construct(SettingsRepositoryInterface $settings, UserRepository $repository, Dispatcher $events, UrlGenerator $url, Translator $translator)
+    public function __construct(SettingsRepositoryInterface $settings, UserRepository $repository, Dispatcher $events, UrlGenerator $url, Translator $translator, CacheContract $cache)
     {
         $this->url = $url;
+        $this->cache = $cache;
         $this->events = $events;
         $this->settings = $settings;
         $this->translator = $translator;
@@ -53,6 +57,12 @@ class EditInviteConfirmController extends AbstractListController
 
         // 审核通过
         if ($params['status'] == 1) {
+            $invite->invite_code = StringUtil::getInviteCode($invite->user_id);
+            $key = md5($invite->email + $invite->user_id);
+            if (!$this->cache->add($key, $invite->invite_code, 5)) {
+                throw new ValidationException(['message' => $this->translator->trans('mattoid-store-invite.forum.error.lock-resources')]);
+            }
+
             // 扣费
             $user = User::query()->where('id', $actor->id)->first();
             $price = $this->settings->get('mattoid-store-invite.price', 0);
