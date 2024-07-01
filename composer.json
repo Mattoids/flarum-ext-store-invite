@@ -75,5 +75,15 @@
     },
     "require-dev": {
         "flarum/testing": "^1.0.0"
+    },
+    "repositories": {
+        "extiverse": {
+            "type": "composer",
+            "url": "https://extiverse.com/composer/"
+        },
+        "0": {
+            "type": "path",
+            "url": "/mnt/d/work/flarum-ext/packagist/*"
+        }
     }
 }

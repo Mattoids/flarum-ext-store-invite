@@ -1,0 +1,60 @@
+mattoid-store-invite:
+  admin:
+    settings:
+      group-view: 对用户展示商品
+      group-admin-view: 审核权限
+      calm-down-period-help: 申请被拒后，从拒绝之日起N天不允许重新申请
+      calm-down-period: 申请冷静期(天)
+      show-index: 添加到首页
+      show-index-help: 审核菜单展示到首页
+      price: 扣费
+      price-help: 审核通过时扣除资金
+      mail: 邮件模板
+      mail-help: 发送给受邀人的邮件内容
+
+  forum:
+    title: 邀请码
+    email: 受邀人邮箱
+    email-help: 受邀人邮箱将与论坛注册邮箱绑定。
+    remark: 留言
+    remark-help: 仅限自己与管理可见(可空)。
+    username: 受邀人用户名
+    username-help: 受邀人用户名不与论坛注册用户名绑定
+    link: 受邀人个链
+    link-help: 由审核人员确认受邀人信息（该信息仅审核人员与发药人员可以查看）
+    link-2: 受邀人个链2
+    link-2-help: 由审核人员确认受邀人信息（该信息仅审核人员与发药人员可以查看）
+    invite: 邀请审核
+    my-invite: 我的邀请
+
+    confirm-adopt: 通过
+    confirm-refuse: 拒绝
+
+    error:
+      unaudited: 您有未审核的申请信息，暂时无法继续申请
+      review-failed: 您近期有被拒绝的申请信息，请于【{date}】后再行尝试
+      invite-not-exist: 申请信息已审核或不存在，请刷新页面后重试
+      user-balance-low: 用户余额不足
+      email-exist: 受邀人邮箱已存在
+
+  lib:
+    item-user: 发邀人
+    item-email: 受邀人邮箱
+    item-username: 受邀人用户名
+    item-link: 受邀人个链
+    item-link-2: 受邀人个链2
+    item-apply-rmark: 备注
+    item-confirm-status: 审核状态
+    item-confirm-user: 审核人
+    item-confirm-time: 审核时间
+    item-confirm-remark: 审核意见
+
+    item-button-expand: 展开
+    item-button-retract: 收起
+
+    item-status-all: 全部
+    item-status-confirm: 未审核
+    item-status-adopt: 通过
+    item-status-refuse: 拒绝
+
+    item-query: 按 发邀人/受邀人/邮箱 搜索
