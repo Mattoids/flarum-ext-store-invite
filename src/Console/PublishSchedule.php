@@ -13,7 +13,7 @@ class PublishSchedule
         $settingTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
 
         // 设置时间
-        $event->everyMinute()->withoutOverlapping()->timezone($settingTimezone);
+        $event->everyFiveMinutes()->withoutOverlapping()->timezone($settingTimezone);
 
         $paths = resolve(Paths::class);
         $event->appendOutputTo($paths->storage.(DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'mattoid-store-invite.log'));
