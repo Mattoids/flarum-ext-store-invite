@@ -23,6 +23,8 @@ return Migration::createTable(
 
         // created_at & updated_at
         $table->timestamps();
+
+        $table->index('created_at');
     }
 );
 
