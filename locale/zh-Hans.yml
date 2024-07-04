@@ -17,6 +17,11 @@ mattoid-store-invite:
       inconsistency-username-help: 受邀人用户名必须与注册用户名一致
       inconsistency-email: 验证邮箱
       inconsistency-email-help: 受邀人邮箱必须与注册用户名一致
+      auto-review: 自动审核通过
+      auto-review-help: 勾选后，系统自动通过完成审核操作
+      auto-review-username: 自动审核用户
+      auto-review-username-help: 启用自动审核时，系统会查询输入的用户
+      mail-template: [user]，您好！ 您的邀请码为：[code]
 
   forum:
     title: 邀请码
@@ -32,6 +37,7 @@ mattoid-store-invite:
     link-2-help: 由审核人员确认受邀人信息（该信息仅审核人员与发药人员可以查看）
     invite: 邀请审核
     my-invite: 我的邀请
+    system-review: 系统自动审核通过
 
     confirm-adopt: 通过
     confirm-refuse: 拒绝
@@ -48,6 +54,7 @@ mattoid-store-invite:
       lock-resources: 当前资源被锁定，请稍后重试
       email-inconsistency: 邮箱与邀请信息不一致，请使用收到邀请码的邮箱
       username-inconsistency: 用户名与邀请信息不一致，请使用邮件中的用户名注册
+      exception: 自动审核失败【{message}】
 
   lib:
     item-user: 发邀人

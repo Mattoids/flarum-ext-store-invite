@@ -24,23 +24,38 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: 0
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.auto.review',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.auto-review-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.auto-review'),
+      type: 'switch',
+      default: 0
+    })
+    .registerSetting({
+      setting: 'mattoid-store-invite.auto.review.username',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.auto-review-username-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.auto-review-username'),
+      type: 'text',
+      default: 'admin'
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.calm-down-period',
       help: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period'),
       type: 'number',
-      default: ''
+      default: 0
     })
     .registerSetting({
       setting: 'mattoid-store-invite.price',
       help: app.translator.trans('mattoid-store-invite.admin.settings.price-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.price'),
       type: 'number',
-      default: ''
+      default: 0
     })
     .registerSetting({
       setting: 'mattoid-store-invite.mail.title',
       help: app.translator.trans('mattoid-store-invite.admin.settings.mail-title-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.mail-title'),
+      placeholder: app.translator.trans('mattoid-store-invite.admin.settings.mail-title'),
       type: 'text',
       default: ''
     })
@@ -48,6 +63,7 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       setting: 'mattoid-store-invite.mail',
       help: app.translator.trans('mattoid-store-invite.admin.settings.mail-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.mail'),
+      placeholder: app.translator.trans('mattoid-store-invite.admin.settings.mail-template'),
       type: 'textarea',
       rows: 5
     })

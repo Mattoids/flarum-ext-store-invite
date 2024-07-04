@@ -6,22 +6,25 @@ use Flarum\Foundation\ValidationException;
 use Flarum\Locale\Translator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
-use Illuminate\Contracts\Events\Dispatcher;
-use Mattoid\StoreInvite\Event\InviteEvent;
 use Illuminate\Contracts\Cache\Repository as CacheContract;
+use Illuminate\Contracts\Events\Dispatcher;
+use Mattoid\StoreInvite\Event\Event\InviteEvent;
 use Mattoid\StoreInvite\Model\InviteModel;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Mail\Message;
 
 class InviteListeners
 {
-
     private $cache;
+    private $mailer;
     private $events;
     private $settings;
     private $translator;
 
-    public function __construct(Dispatcher $events, SettingsRepositoryInterface $settings, Translator $translator, CacheContract $cache)
+    public function __construct(Dispatcher $events, SettingsRepositoryInterface $settings, Translator $translator, CacheContract $cache, Mailer $mailer)
     {
         $this->cache = $cache;
+        $this->mailer = $mailer;
         $this->events = $events;
         $this->settings = $settings;
         $this->translator = $translator;
@@ -30,9 +33,14 @@ class InviteListeners
     public function handle(InviteEvent $event) {
         $user = $event->user;
         $invite = $event->invite;
-        $key = md5($invite->email + $invite->user_id);
+        $key = md5("sendEmail-{$invite->email}-{$invite->user_id}");
         // 受邀人是否存在
-        $user = User::query()->where('email', $invite->email)->orWhere('second_email', $invite->email)->first();
+        $user = User::query()->where(function($where) use ($invite) {
+            $where->where('email', $invite->email);
+            if (class_exists('Mattoid\SecondEmail\Search\SecondEmailSearch')) {
+                $where->orWhere('second_email', $invite->email);
+            }
+        })->first();
         if ($user) {
             throw new ValidationException(['message' => $this->translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mattoid\StoreInvite\Event;
+namespace Mattoid\StoreInvite\Event\Event;
 
 use Flarum\User\User;
 use Mattoid\StoreInvite\Model\InviteModel;

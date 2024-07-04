@@ -45,10 +45,15 @@ class ListInviteApplyController extends AbstractListController
                 $where->where('status', $status);
             }
             if ($query) {
-                $user = User::query()->where('username', $query)->first();
-                $where->where(function($where) use ($user, $query) {
-                    $where->where('user_id', $user->id)->orWhere('email', $query)->orWhere('username', $query);
-                });            }
+                $userIdList = [];
+                $userList = User::query()->where('username', 'like', "{$query}%")->get('id');
+                foreach ($userList as $user) {
+                    $userIdList[] = $user->id;
+                }
+                $where->where(function($where) use ($userIdList, $query) {
+                    $where->whereIn('user_id', $userIdList)->orWhere('email', 'like', "{$query}%")->orWhere('username', 'like', "{$query}%");
+                });
+            }
         })->orderByDesc('id')->get();
 
 

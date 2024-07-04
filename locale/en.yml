@@ -13,6 +13,11 @@ mattoid-store-invite:
       mail-help: Email content sent to invitees
       mail-title: Email Title
       mail-title-help: The invitee receives the title content of the email
+      auto-review: Automatic review passed
+      auto-review-help: After checking, the system will automatically pass and complete the review operation
+      auto-review-username: Automatically review users
+      auto-review-username-help: When automatic auditing is enabled, the system will query the entered users
+      mail-template: Hello [user], Your invitation code is [code]
 
   forum:
     title: Invite
@@ -28,6 +33,7 @@ mattoid-store-invite:
     link-2-help: Confirmation of invitee information by reviewers (this information can only be viewed by reviewers and dispensing personnel)
     invite: Invitation review
     my-invite: My invitation
+    system-review: System automatic review
 
     confirm-adopt: confirm
     confirm-refuse: refuse
@@ -42,6 +48,9 @@ mattoid-store-invite:
       user-balance-low: Insufficient user balance
       email-exist: The invitee's email already exists
       lock-resources: The current resource is locked. Please try again later
+      email-inconsistency: The email and invitation information do not match. Please use the email that received the invitation code
+      username-inconsistency: The username does not match the invitation information. Please register using the username provided in the email
+      exception: Automatic review failed [{message}]
 
   lib:
     item-user: Inviter
