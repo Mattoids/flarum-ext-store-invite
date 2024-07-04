@@ -19,6 +19,6 @@ class StoreInvalidListeners
     }
 
     public function handle(StoreInvalidEvent $event) {
-        app('log')->info('商品失效事件');
+        // 商品失效事件
     }
 }

@@ -10,6 +10,6 @@ class InviteInvalid extends Invalid
 {
 
     public static function invalid(StoreModel $store, StoreCartModel $cart) {
-        app('log')->info('商品失效业务逻辑');
+        // 商品失效业务逻辑
     }
 }
