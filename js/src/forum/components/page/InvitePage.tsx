@@ -6,6 +6,7 @@ import Stream from "flarum/common/utils/Stream";
 import Mithril from 'mithril';
 import Select from "flarum/common/components/Select";
 import InviteItem from "../component/InviteItem";
+import Button from 'flarum/components/Button';
 
 export default class InvitePage<CustomAttrs> extends IndexPage {
 

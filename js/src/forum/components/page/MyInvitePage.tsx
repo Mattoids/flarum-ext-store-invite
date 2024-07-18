@@ -5,6 +5,7 @@ import InviteItem from "../component/InviteItem";
 import Stream from "flarum/common/utils/Stream";
 import MyInviteItem from "../component/MyInviteItem";
 import Select from "flarum/common/components/Select";
+import Button from 'flarum/components/Button';
 
 export default class MyInvitePage extends UserPage {
 

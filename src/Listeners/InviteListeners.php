@@ -53,7 +53,7 @@ class InviteListeners
     private function sendInvites(InviteModel $invite, $inviteCode)
     {
         $replace = [
-            '[user]' => $invite->user->username,
+            '[user]' => $invite->username,
             '[code]' => $inviteCode,
         ];
 
