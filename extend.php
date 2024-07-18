@@ -19,7 +19,7 @@ use Mattoid\StoreInvite\Console\Command\AutoReviewCommand;
 use Mattoid\StoreInvite\Console\PublishSchedule;
 use Mattoid\StoreInvite\Controller\EditInviteConfirmController;
 use Mattoid\StoreInvite\Controller\ListInviteApplyController;
-use Mattoid\StoreInvite\Event\Event\InviteEvent;
+use Mattoid\StoreInvite\Event\InviteEvent;
 use Mattoid\StoreInvite\Goods\InviteAfter;
 use Mattoid\StoreInvite\Goods\InviteGoods;
 use Mattoid\StoreInvite\Goods\InviteInvalid;

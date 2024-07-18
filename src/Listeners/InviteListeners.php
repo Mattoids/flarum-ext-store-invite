@@ -8,10 +8,10 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
 use Illuminate\Contracts\Cache\Repository as CacheContract;
 use Illuminate\Contracts\Events\Dispatcher;
-use Mattoid\StoreInvite\Event\Event\InviteEvent;
-use Mattoid\StoreInvite\Model\InviteModel;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Mail\Message;
+use Mattoid\StoreInvite\Event\InviteEvent;
+use Mattoid\StoreInvite\Model\InviteModel;
 
 class InviteListeners
 {

@@ -37,10 +37,10 @@ class InviteValidate extends Validate
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.unaudited')]);
         }
 
-        $time = Carbon::now()->subDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai'));
+        $time = Carbon::now()->subDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
         $invite = InviteModel::query()->where('user_id', $user->id)->where('confirm_time', '>=', $time)->orderByDesc('created_at')->first();
         if ($invite) {
-            $date = Carbon::parse($invite->confirm_time)->addDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai'));
+            $date = Carbon::parse($invite->confirm_time)->addDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-failed', ['date' => $date])]);
         }
 

@@ -27,8 +27,8 @@ class InviteAfter extends After
         $insert = ObjectsUtil::removeEmptySql($params);
         $insert['user_id'] = $user->id;
         $insert['status'] = 0;
-        $insert['created_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai'));
-        $insert['updated_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai'));
+        $insert['created_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
+        $insert['updated_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
         unset($insert['id']);
 
         InviteModel::query()->insert($insert);

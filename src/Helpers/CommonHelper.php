@@ -8,7 +8,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
-use Mattoid\StoreInvite\Event\Event\InviteEvent;
+use Mattoid\StoreInvite\Event\InviteEvent;
 use Mattoid\StoreInvite\Model\InviteModel;
 use Mattoid\StoreInvite\Utils\StringUtil;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -53,8 +53,8 @@ class CommonHelper
         $invite->confirm_user_id = $actor->id;
         $invite->confirm_remark = $params['confirmRemark'];
         $invite->status = $params['status'];
-        $invite->confirm_time = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai'));
-        $invite->updated_at = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai'));
+        $invite->confirm_time = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai') ?? 'Asia/Shanghai');
+        $invite->updated_at = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai') ?? 'Asia/Shanghai');
         $invite->save();
 
         $cache->delete($key);

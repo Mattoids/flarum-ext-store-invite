@@ -68,7 +68,7 @@ export default class InviteItem extends Component {
             loading: this.loading,
             disabled: this.loading,
             onclick: () => {
-              this.params.status = 1
+              this.params.status = 2
               this.onsubmit()
             }
           }, app.translator.trans('mattoid-store-invite.forum.confirm-refuse')))
