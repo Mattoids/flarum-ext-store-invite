@@ -22,12 +22,17 @@ class AutoReviewCommand extends AbstractCommand
     protected $events;
     protected $settings;
 
+    private $storeTimezone = 'Asia/Shanghai';
+
     public function __construct(SettingsRepositoryInterface $settings, TranslatorInterface $translator, Repository $cache, Dispatcher $events) {
         parent::__construct();
         $this->cache = $cache;
         $this->events = $events;
         $this->settings = $settings;
         $this->translator = $translator;
+
+        $storeTimezone = $this->settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
+        $this->storeTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';
     }
 
     protected function configure()
@@ -43,7 +48,7 @@ class AutoReviewCommand extends AbstractCommand
         }
 
         // 为防止数据过大导致查询过慢的问题，这里只查询一天的数据
-        $datetime = Carbon::now()->subDay()->tz($this->settings->get('mattoid-store.storeTimezone','Asia/Shanghai'));
+        $datetime = Carbon::now()->subDay()->tz($this->storeTimezone);
         $inviteList = InviteModel::query()->where('created_at','>=', $datetime)->where('status', 0)->get();
         // 没有待审核数据，直接无视
         if (!$inviteList) {
