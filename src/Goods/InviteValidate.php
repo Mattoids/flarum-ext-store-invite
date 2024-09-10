@@ -29,6 +29,11 @@ class InviteValidate extends Validate
             return false;
         }
 
+        if ($user->can('mattoid-store-invite.group-blacklist-view')) {
+            throw new PermissionDeniedException();
+            return false;
+        }
+
         $settings = resolve(SettingsRepositoryInterface::class);
         $translator = resolve(TranslatorInterface::class);
 

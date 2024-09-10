@@ -77,6 +77,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
     .registerPermission(
       {
         icon: 'fas fa-id-card',
+        label: app.translator.trans('mattoid-store-invite.admin.settings.group-blacklist-view'),
+        permission: 'mattoid-store-invite.group-blacklist-view',
+        allowGuest: true
+      }, 'view')
+    .registerPermission(
+      {
+        icon: 'fas fa-id-card',
         label: app.translator.trans('mattoid-store-invite.admin.settings.group-admin-view'),
         permission: 'mattoid-store-invite.group-admin-view',
         allowGuest: true
