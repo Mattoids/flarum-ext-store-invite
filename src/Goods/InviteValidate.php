@@ -47,7 +47,7 @@ class InviteValidate extends Validate
         }
 
         $time = Carbon::now()->subDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settingTimezone);
-        $invite = InviteModel::query()->where('user_id', $user->id)->where('confirm_time', '>=', $time)->orderByDesc('created_at')->first();
+        $invite = InviteModel::query()->where('user_id', $user->id)->where('confirm_time', '>=', $time)->where('status', 2)->orderByDesc('created_at')->first();
         if ($invite) {
             $date = Carbon::parse($invite->confirm_time)->addDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settingTimezone);
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-failed', ['date' => $date])]);
