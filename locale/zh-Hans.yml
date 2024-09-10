@@ -31,7 +31,7 @@ mattoid-store-invite:
     email: 受邀人邮箱
     email-help: 受邀人邮箱将与论坛注册邮箱绑定。
     remark: 留言
-    remark-help: 【可选】仅限自己与管理可见(可空)。
+    remark-help: 【可选】仅限自己与管理可见。
     username: 受邀人PT用户名
     username-help: 受邀人用户名不与论坛注册用户名绑定，注册药丸论坛时可以自由使用昵称
     link: 受邀人个人主页链接
