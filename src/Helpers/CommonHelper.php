@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
+use FoF\Doorman\Doorkey;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Mattoid\StoreInvite\Event\InviteEvent;
@@ -15,6 +16,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommonHelper
 {
+
+    protected static $defaultGroupId = 3;
 
     public static function confirm(User $actor, $params, InviteModel $invite)
     {
@@ -45,6 +48,10 @@ class CommonHelper
             if (!$user->save()) {
                 throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.user-balance-low')]);
             }
+
+            // 创建邀请码
+            $doorkey = Doorkey::build($invite->invite_code, CommonHelper::$defaultGroupId, 1, false);
+            $doorkey->save();
 
             // 发送邀请码
             $events->dispatch(new InviteEvent($user, $invite));
