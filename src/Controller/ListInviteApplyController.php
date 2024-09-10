@@ -36,15 +36,10 @@ class ListInviteApplyController extends AbstractListController
         $offset = $this->extractOffset($request);
         $status = Arr::get($params, 'filter.status');
         $query = Arr::get($params, 'filter.query');
-        $username = Arr::get($params, 'filter.username');
 
-        $queryUser = User::query()->where('username', $username)->first();
-        $list = InviteModel::query()->where(function($where) use ($actor, $query, $status, $queryUser) {
+        $list = InviteModel::query()->where(function($where) use ($actor, $query, $status) {
             if (!$actor->can('mattoid-store-invite.admin-group')) {
                 $where->where('user_id', $actor->id);
-            }
-            if ($queryUser) {
-                $where->where('user_id', $queryUser->id);
             }
             if ($status >= 0) {
                 $where->where('status', $status);
