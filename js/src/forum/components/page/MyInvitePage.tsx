@@ -110,7 +110,8 @@ export default class MyInvitePage extends UserPage {
   loadResults(offset = 0) {
     const filters = {
       query: this.query(),
-      status: this.status()
+      status: this.status(),
+      username: this.user.slug()
     };
 
     return app.store
