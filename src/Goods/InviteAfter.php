@@ -9,6 +9,7 @@ use Mattoid\Store\Goods\After;
 use Mattoid\Store\Model\StoreModel;
 use Mattoid\Store\Utils\ObjectsUtil;
 use Mattoid\StoreInvite\Model\InviteModel;
+use Mattoid\StoreInvite\Utils\StringUtil;
 
 class InviteAfter extends After
 {
@@ -30,6 +31,7 @@ class InviteAfter extends After
         $insert = ObjectsUtil::removeEmptySql($params);
         $insert['user_id'] = $user->id;
         $insert['status'] = 0;
+        $insert['invite_code'] = StringUtil::getInviteCode($user->id);
         $insert['created_at'] = Carbon::now()->tz($settingTimezone);
         $insert['updated_at'] = Carbon::now()->tz($settingTimezone);
         unset($insert['id']);

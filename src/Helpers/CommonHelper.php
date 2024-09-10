@@ -30,7 +30,6 @@ class CommonHelper
 
         // 审核通过
         if ($params['status'] == 1) {
-            $invite->invite_code = StringUtil::getInviteCode($invite->user_id);
             if (!$cache->add($key, $invite->invite_code, 5)) {
                 throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.lock-resources')]);
             }
