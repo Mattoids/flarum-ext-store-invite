@@ -25,6 +25,9 @@ class CommonHelper
         $settings = resolve(SettingsRepositoryInterface::class);
         $translator = resolve(TranslatorInterface::class);
 
+        $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
+        $settingTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';
+
         // 审核通过
         if ($params['status'] == 1) {
             $invite->invite_code = StringUtil::getInviteCode($invite->user_id);
@@ -58,8 +61,8 @@ class CommonHelper
         $invite->confirm_user_id = $actor->id;
         $invite->confirm_remark = $params['confirmRemark'];
         $invite->status = $params['status'];
-        $invite->confirm_time = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai') ?? 'Asia/Shanghai');
-        $invite->updated_at = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai') ?? 'Asia/Shanghai');
+        $invite->confirm_time = Carbon::now()->tz($settingTimezone);
+        $invite->updated_at = Carbon::now()->tz($settingTimezone);
         $invite->save();
 
         $cache->delete($key);

@@ -29,7 +29,8 @@ class InviteValidate extends Validate
             return false;
         }
 
-        if ($user->can('mattoid-store-invite.group-blacklist-view')) {
+        $groupIds = array_column(json_decode(json_encode($user->groups)), 'id');
+        if ($user->can('mattoid-store-invite.group-blacklist-view') && !in_array('1', $groupIds)) {
             throw new PermissionDeniedException();
             return false;
         }
@@ -37,15 +38,18 @@ class InviteValidate extends Validate
         $settings = resolve(SettingsRepositoryInterface::class);
         $translator = resolve(TranslatorInterface::class);
 
+        $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
+        $settingTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';
+
         $invite = InviteModel::query()->where('user_id', $user->id)->where('status', 0)->first();
         if ($invite) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.unaudited')]);
         }
 
-        $time = Carbon::now()->subDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
+        $time = Carbon::now()->subDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settingTimezone);
         $invite = InviteModel::query()->where('user_id', $user->id)->where('confirm_time', '>=', $time)->orderByDesc('created_at')->first();
         if ($invite) {
-            $date = Carbon::parse($invite->confirm_time)->addDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
+            $date = Carbon::parse($invite->confirm_time)->addDays($settings->get('mattoid-store-invite.calm-down-period', 0))->tz($settingTimezone);
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-failed', ['date' => $date])]);
         }
 

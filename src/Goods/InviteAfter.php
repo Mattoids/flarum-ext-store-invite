@@ -24,11 +24,14 @@ class InviteAfter extends After
 
         $settings = resolve(SettingsRepositoryInterface::class);
 
+        $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
+        $settingTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';
+
         $insert = ObjectsUtil::removeEmptySql($params);
         $insert['user_id'] = $user->id;
         $insert['status'] = 0;
-        $insert['created_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
-        $insert['updated_at'] = Carbon::now()->tz($settings->get('mattoid-store.storeTimezone','Asia/Shanghai') ?? 'Asia/Shanghai');
+        $insert['created_at'] = Carbon::now()->tz($settingTimezone);
+        $insert['updated_at'] = Carbon::now()->tz($settingTimezone);
         unset($insert['id']);
 
         InviteModel::query()->insert($insert);
