@@ -28,6 +28,8 @@ use Mattoid\StoreInvite\Listeners\InviteListeners;
 use Mattoid\StoreInvite\Listeners\StoreInvalidListeners;
 use Mattoid\StoreInvite\Listeners\StoreInviteListeners;
 use Mattoid\StoreInvite\Middleware\RegistrationInterceptMiddleware;
+use Flarum\Group\Group;
+use Flarum\User\Event\Activated;
 
 return [
     (new Extend\Frontend('forum'))
@@ -67,4 +69,7 @@ return [
     (new Extend\Console())
         ->command(AutoReviewCommand::class)
         ->schedule(AutoReviewCommand::class, new PublishSchedule()),
+
+    (new Extend\Settings())
+        ->default('mattoid-store-invite.group', Group::MEMBER_ID),
 ];

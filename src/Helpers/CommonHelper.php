@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
+use Flarum\Group\Group;
 use FoF\Doorman\Doorkey;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -16,9 +17,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommonHelper
 {
-
-    protected static $defaultGroupId = 3;
-
     public static function confirm(User $actor, $params, InviteModel $invite)
     {
         $key = md5("confirm-{$invite->email}-{$invite->user_id}");
@@ -50,7 +48,7 @@ class CommonHelper
             }
 
             // 创建邀请码
-            $doorkey = Doorkey::build($invite->invite_code, CommonHelper::$defaultGroupId, 1, false);
+            $doorkey = Doorkey::build($invite->invite_code, $settings->get('mattoid-store-invite.group', Group::MEMBER_ID), 1, false);
             $doorkey->save();
 
             // 发送邀请码

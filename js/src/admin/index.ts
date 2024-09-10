@@ -1,7 +1,19 @@
 import app from 'flarum/admin/app';
+import Stream from "flarum/common/utils/Stream";
+import Select from 'flarum/common/components/Select';
 
 app.initializers.add('mattoid/flarum-ext-store-invite', () => {
+  let options: any[] = [];
+
   app.extensionData.for("mattoid-store-invite")
+    .registerSetting(function () {
+      app.store.all('groups').map((group) => {
+        if (group.nameSingular() === 'Guest') {
+          return;
+        }
+        options[group.id()] = group.nameSingular();
+      });
+    })
     .registerSetting({
       setting: 'mattoid-store-invite.show-index',
       help: app.translator.trans('mattoid-store-invite.admin.settings.show-index-help'),
@@ -49,6 +61,15 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       help: app.translator.trans('mattoid-store-invite.admin.settings.price-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.price'),
       type: 'number',
+      default: 0
+    })
+    .registerSetting({
+      setting: 'mattoid-store-invite.group',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.group-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.group'),
+      placeholder: app.translator.trans('mattoid-store-invite.admin.settings.group'),
+      type: 'select',
+      options: options,
       default: 0
     })
     .registerSetting({

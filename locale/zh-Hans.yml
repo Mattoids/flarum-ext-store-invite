@@ -23,6 +23,8 @@ mattoid-store-invite:
       auto-review-username-help: 启用自动审核时，系统会查询输入的用户
       mail-template: [user]，您好！ 您的邀请码为：[code]
       group-blacklist-view: 黑名单用户组（该用户组的用户将无法购买商品）
+      group: 注册用户组
+      group-help: 用户注册后默认是该用户组成员
 
   forum:
     title: 邀请码
