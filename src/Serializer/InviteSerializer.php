@@ -14,6 +14,9 @@ class InviteSerializer extends AbstractSerializer
     }
 
     protected function getDefaultAttributes($data) {
+
+        $confirmUserName = $data->confirmUser ? $data->confirmUser->username : '';
+        $confirmAvatarUrl = $data->confirmUser ? $data->confirmUser->avatar_url : '';
         return [
             'id' => $data->id,
             'user' => $data->user->username,
@@ -23,13 +26,15 @@ class InviteSerializer extends AbstractSerializer
             'link' => $data->link,
             'link2' => $data->link2,
             'status' => $data->status,
-            'confirmUser' => $data->confirmUser->username,
-            'confirmUserImg' => $data->confirmUser->avatar_url,
+            'confirmUser' => $confirmUserName,
+            'confirmUserImg' => $confirmAvatarUrl,
             'applyRemark' => $data->apply_remark,
             'confirmTime' => $data->confirm_time,
             'confirmRemark' => $data->confirm_remark,
             'createdAt' => $data->created_at,
             'updatedAt' => $data->updated_at,
+            'totalNum'  => $data->totalNum,
+            'passTotalNum' => $data->passTotalNum,
         ];
     }
 

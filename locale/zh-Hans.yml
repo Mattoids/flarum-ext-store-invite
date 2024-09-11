@@ -80,3 +80,6 @@ mattoid-store-invite:
     item-status-refuse: 拒绝
 
     item-query: 按 发邀人/受邀人/邮箱 搜索
+
+    item-total-num: 累计已提交次数
+    item-pass-total-num: 累计已通过次数

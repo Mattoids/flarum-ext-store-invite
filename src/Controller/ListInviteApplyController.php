@@ -61,6 +61,24 @@ class ListInviteApplyController extends AbstractListController
             }
         })->orderByDesc('id')->get();
 
+        if ($list) {
+            $userIdList = [];
+            foreach ($list as $item) {
+                $userIdList[] = $item->user->id;
+            }
+            $inviteUserMap = [];
+            $inviteUserList = InviteModel::query()->selectRaw("count(1) as totalNum, sum(IF(status = 1, 1, 0)) as passTotalNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
+            foreach ($inviteUserList as $item) {
+                $inviteUserMap[$item->user_id] = $item;
+            }
+
+            app('log')->info(json_encode($inviteUserMap));
+
+            foreach ($list as $item) {
+                $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
+                $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
+            }
+        }
 
         $results = $limit > 0 && $list->count() > $limit;
         if ($results) {
