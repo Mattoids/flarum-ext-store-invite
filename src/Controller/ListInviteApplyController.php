@@ -72,8 +72,6 @@ class ListInviteApplyController extends AbstractListController
                 $inviteUserMap[$item->user_id] = $item;
             }
 
-            app('log')->info(json_encode($inviteUserMap));
-
             foreach ($list as $item) {
                 $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                 $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
