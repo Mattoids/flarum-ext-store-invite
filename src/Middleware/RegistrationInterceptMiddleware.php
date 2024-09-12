@@ -33,10 +33,10 @@ class RegistrationInterceptMiddleware implements MiddlewareInterface
         $invite = InviteModel::query()->where('invite_code', $inviteCode)->orderByDesc('id')->first();
         if ($invite) {
             if ($invite->email != $email && $this->settings->get('mattoid-store-invite.inconsistency.email', 0)) {
-                throw new ValidationException(['message' => $this->translator->trans('mattoid-second-email.forum.error.email-inconsistency')]);
+                throw new ValidationException(['message' => $this->translator->trans('mattoid-store-invite.forum.error.email-inconsistency')]);
             }
             if ($invite->username != $username && $this->settings->get('mattoid-store-invite.inconsistency.username', 0)) {
-                throw new ValidationException(['message' => $this->translator->trans('mattoid-second-email.forum.error.username-inconsistency')]);
+                throw new ValidationException(['message' => $this->translator->trans('mattoid-store-invite.forum.error.username-inconsistency')]);
             }
         }
 
