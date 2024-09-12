@@ -12,7 +12,6 @@ use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Mattoid\StoreInvite\Event\InviteEvent;
 use Mattoid\StoreInvite\Model\InviteModel;
-use Mattoid\StoreInvite\Utils\StringUtil;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommonHelper
@@ -47,6 +46,11 @@ class CommonHelper
             $user->where('money', $money);
             if (!$user->save()) {
                 throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.user-balance-low')]);
+            }
+
+            // 通知资金消费记录插件
+            if (class_exists('Mattoid\MoneyHistory\Event\MoneyHistoryEvent')) {
+                $events->dispatch(new \Mattoid\MoneyHistory\Event\MoneyHistoryEvent($user, -$price, 'CONFIRMINVITE', $translator->trans("mattoid-store-invite.forum.confirm-invite-price"), ''));
             }
 
             // 创建邀请码

@@ -41,6 +41,7 @@ mattoid-store-invite:
     invite: 邀请审核
     my-invite: 我的邀请
     system-review: 系统自动审核通过
+    confirm-invite-price: 邀请扣费
 
     confirm-adopt: 通过
     confirm-refuse: 拒绝
