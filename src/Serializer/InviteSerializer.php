@@ -17,7 +17,8 @@ class InviteSerializer extends AbstractSerializer
 
         $confirmUserName = $data->confirmUser ? $data->confirmUser->username : '';
         $confirmAvatarUrl = $data->confirmUser ? $data->confirmUser->avatar_url : '';
-        return [
+
+        $attributes = [
             'id' => $data->id,
             'user' => $data->user->username,
             'userImg' => $data->user->avatar_url,
@@ -36,6 +37,13 @@ class InviteSerializer extends AbstractSerializer
             'totalNum'  => $data->totalNum,
             'passTotalNum' => $data->passTotalNum,
         ];
+
+        if (!$this->actor->can('mattoid-store-invite.group-admin-view')) {
+            $attributes["confirmUser"] = "";
+            $attributes["confirmUserImg"] = "";
+        }
+
+        return $attributes;
     }
 
 }

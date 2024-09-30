@@ -20,14 +20,14 @@ export default class MyInviteItem extends Component {
   view() {
     let confirm = m('div', [
       m('div.spacing', [
-        m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-user') + ': '),
-        m('span', LinkButton.component({
-          href: '/u/' + this.inviteData.confirmUser
-        }, <img className="Invite-Icon" src={this.inviteData.confirmUserImg}/>)),
-        m('span', LinkButton.component({
-          href: '/u/' + this.inviteData.confirmUser
-        }, this.inviteData.confirmUser)),
-        m('span.horizontal-spacing', ' | '),
+        // m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-user') + ': '),
+        // m('span', LinkButton.component({
+        //   href: '/u/' + this.inviteData.confirmUser
+        // }, <img className="Invite-Icon" src={this.inviteData.confirmUserImg}/>)),
+        // m('span', LinkButton.component({
+        //   href: '/u/' + this.inviteData.confirmUser
+        // }, this.inviteData.confirmUser)),
+        // m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-status') + ': '),
         m('span', this.inviteData.status == 1 ? '通过' : this.inviteData.status == 2 ? '拒绝' : '未审核'),
         m('span.horizontal-spacing', ' | '),

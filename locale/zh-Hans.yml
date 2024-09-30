@@ -1,7 +1,7 @@
 mattoid-store-invite:
   admin:
     settings:
-      group-view: 对用户展示商品
+      group-view: 拥有购买权限
       group-admin-view: 审核权限
       calm-down-period-help: 申请被拒后，从拒绝之日起N天不允许重新申请
       calm-down-period: 申请冷静期(天)
@@ -34,7 +34,7 @@ mattoid-store-invite:
     remark-help: 【可选】仅限自己与管理可见。
     username: 受邀人PT用户名
     username-help: 受邀人用户名不与论坛注册用户名绑定，注册药丸论坛时可以自由使用昵称
-    link: 受邀人个人主页链接
+    link: 受邀人个人主页链接（满足Power User以上）
     link-help: 由审核人员确认受邀人信息（该信息仅审核人员与发药人员可以查看）
     link-2: 受邀人个人主页链接2
     link-2-help: 【可选】由审核人员确认受邀人信息（该信息仅审核人员与发药人员可以查看）

@@ -60,7 +60,10 @@ class InviteValidate extends Validate
                 $where->orWhere('second_email', $params['email']);
             }
         })->first();
-        if ($user) {
+
+        $inviteValidate = InviteModel::query()->where('email', $params['email'])->whereIn('status', [1, 2])->first();
+
+        if ($user || $inviteValidate) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }
 
