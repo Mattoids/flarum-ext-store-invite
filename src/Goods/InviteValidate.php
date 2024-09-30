@@ -7,6 +7,7 @@ use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Exception\PermissionDeniedException;
 use Flarum\User\User;
+use Illuminate\Contracts\Cache\Repository;
 use Mattoid\Store\Goods\Validate;
 use Mattoid\Store\Model\StoreModel;
 use Mattoid\StoreInvite\Model\InviteModel;
@@ -35,8 +36,14 @@ class InviteValidate extends Validate
             return false;
         }
 
+        $cache = resolve(Repository::class);
         $settings = resolve(SettingsRepositoryInterface::class);
         $translator = resolve(TranslatorInterface::class);
+
+        $key = md5("confirm-{$params['email']}");
+        if (!$cache->add($key, $params['email'], 30)) {
+            throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.lock-resources')]);
+        }
 
         $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
         $settingTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';

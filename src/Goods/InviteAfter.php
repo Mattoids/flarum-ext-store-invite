@@ -23,6 +23,7 @@ class InviteAfter extends After
      */
     public static function after(User $user, StoreModel $store, $params) {
 
+        $cache = resolve(Repository::class);
         $settings = resolve(SettingsRepositoryInterface::class);
 
         $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
@@ -37,6 +38,10 @@ class InviteAfter extends After
         unset($insert['id']);
 
         InviteModel::query()->insert($insert);
+
+
+        $key = md5("confirm-{$params['email']}");
+        $cache->delete($key);
 
         return true;
     }
