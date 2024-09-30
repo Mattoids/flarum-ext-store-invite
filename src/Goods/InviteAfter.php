@@ -8,6 +8,7 @@ use Flarum\User\User;
 use Mattoid\Store\Goods\After;
 use Mattoid\Store\Model\StoreModel;
 use Mattoid\Store\Utils\ObjectsUtil;
+use Illuminate\Contracts\Cache\Repository;
 use Mattoid\StoreInvite\Model\InviteModel;
 use Mattoid\StoreInvite\Utils\StringUtil;
 
