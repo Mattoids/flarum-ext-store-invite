@@ -131,9 +131,9 @@ export default class InviteItem extends Component {
             href: this.inviteData.link2
           }, this.inviteData.link2))
         ]),
-        m('div.spacing', [
+        m('div.spacing.fixed', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-apply-rmark') + ': '),
-          m('span.fixed', this.inviteData.applyRemark),
+          m('span', this.inviteData.applyRemark),
         ]),
         confirm
       ])
