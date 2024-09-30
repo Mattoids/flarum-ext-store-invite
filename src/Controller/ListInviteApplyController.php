@@ -59,7 +59,9 @@ class ListInviteApplyController extends AbstractListController
                     $where->whereIn('user_id', $userIdList)->orWhere('email', 'like', "{$query}%")->orWhere('username', 'like', "{$query}%");
                 });
             }
-        })->get();
+        })->skip($offset)
+            ->take($limit + 1)
+            ->get();
 
         if ($list) {
             $userIdList = [];
