@@ -61,6 +61,7 @@ class ListInviteApplyController extends AbstractListController
             }
         })->skip($offset)
             ->take($limit + 1)
+            ->orderBy("id", $status == 0 ? 'asc' : 'desc')
             ->get();
 
         if ($list) {
