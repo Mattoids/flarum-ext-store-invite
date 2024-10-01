@@ -80,3 +80,5 @@ mattoid-store-invite:
 
     item-total-num: Accumulated number of submissions
     item-pass-total-num: Accumulated number of passes
+
+    item-invite-code: Invite

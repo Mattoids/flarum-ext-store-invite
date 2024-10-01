@@ -33,6 +33,9 @@ export default class MyInviteItem extends Component {
         m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-time') + ': '),
         m('span', this.inviteData.confirmTime),
+        m('span.horizontal-spacing', ' | '),
+        m('label', app.translator.trans('mattoid-store-invite.lib.item-invite-code') + ': '),
+        m('span', this.inviteData.inviteCode),
       ]),
       m('div.spacing.fixed', [
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-remark') + ': '),

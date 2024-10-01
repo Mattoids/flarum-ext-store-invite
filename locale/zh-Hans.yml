@@ -84,3 +84,5 @@ mattoid-store-invite:
 
     item-total-num: 累计已提交次数
     item-pass-total-num: 累计已通过次数
+
+    item-invite-code: 邀请码

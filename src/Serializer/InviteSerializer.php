@@ -36,7 +36,12 @@ class InviteSerializer extends AbstractSerializer
             'updatedAt' => $data->updated_at,
             'totalNum'  => $data->totalNum,
             'passTotalNum' => $data->passTotalNum,
+            'inviteCode' => '',
         ];
+
+        if ($data -> status = 1) {
+            $attributes['inviteCode'] = $data->invite_code;
+        }
 
         if (!$this->actor->can('mattoid-store-invite.group-admin-view')) {
             $attributes["confirmUser"] = "";
