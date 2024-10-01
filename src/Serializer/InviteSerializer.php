@@ -39,7 +39,7 @@ class InviteSerializer extends AbstractSerializer
             'inviteCode' => '',
         ];
 
-        if ($data -> status = 1) {
+        if ($data -> status == 1) {
             $attributes['inviteCode'] = $data->invite_code;
         }
 
