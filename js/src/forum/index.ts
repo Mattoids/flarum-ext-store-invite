@@ -8,12 +8,10 @@ import IndexPage from 'flarum/forum/components/IndexPage';
 import LinkButton from 'flarum/common/components/LinkButton';
 
 app.initializers.add('mattoid/flarum-ext-store-invite', () => {
-  if (app.session.user.attribute('canInviteAdminView')) {
-    app.routes.invite = {
-      path: '/invite',
-      component: InvitePage,
-    };
-  }
+  app.routes.invite = {
+    path: '/invite',
+    component: InvitePage,
+  };
   app.routes.myInvitePage = {
     path: '/u/:username/invite',
     component: MyInvitePage,
