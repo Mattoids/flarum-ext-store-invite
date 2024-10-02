@@ -8,10 +8,6 @@ import IndexPage from 'flarum/forum/components/IndexPage';
 import LinkButton from 'flarum/common/components/LinkButton';
 
 app.initializers.add('mattoid/flarum-ext-store-invite', () => {
-  app.routes.invite = {
-    path: '/invite',
-    component: InvitePage,
-  };
   app.routes.myInvitePage = {
     path: '/u/:username/invite',
     component: MyInvitePage,
@@ -30,6 +26,10 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
     if (!app.session.user.attribute('canInviteAdminView') || app.forum.attribute("inviteShowIndex") == 0) {
       return false;
     }
+    app.routes.invite = {
+      path: '/invite',
+      component: InvitePage,
+    };
 
     items.add('invite', LinkButton.component({
       href: app.route('invite'),
