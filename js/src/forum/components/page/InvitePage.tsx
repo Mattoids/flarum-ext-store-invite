@@ -16,18 +16,24 @@ export default class InvitePage<CustomAttrs> extends IndexPage {
   private moreResults: boolean = false
 
   oncreate(vnode: Mithril.VnodeDOM<CustomAttrs, this>) {
-    super.oncreate(vnode);
+    if (app.session.user.attribute('canInviteAdminView')) {
+      super.oncreate(vnode);
 
-    app.setTitle(app.translator.trans('mattoid-store-invite.forum.invite'));
-    app.setTitleCount(0);
+      app.setTitle(app.translator.trans('mattoid-store-invite.forum.invite'));
+      app.setTitleCount(0);
 
-    this.status = Stream('0');
-    this.query = Stream('');
+      this.status = Stream('0');
+      this.query = Stream('');
 
-    this.loadResults();
+      this.loadResults();
+    }
   }
 
   view() {
+    if (!app.session.user.attribute('canInviteAdminView')) {
+      return ""
+    }
+
     return (
       <div className="IndexPage">
         <div className="container">
