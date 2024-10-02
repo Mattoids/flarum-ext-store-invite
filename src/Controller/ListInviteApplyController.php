@@ -40,7 +40,7 @@ class ListInviteApplyController extends AbstractListController
 
         $queryUser = User::query()->where('username', $username)->first();
         $list = InviteModel::query()->where(function($where) use ($actor, $query, $status, $queryUser) {
-            if (!$actor->can('mattoid-store-invite.admin-group')) {
+            if (!$actor->can('mattoid-store-invite.group-admin-view')) {
                 $where->where('user_id', $actor->id);
             }
             if ($queryUser) {
