@@ -29,7 +29,7 @@ export default class MyInviteItem extends Component {
         // }, this.inviteData.confirmUser)),
         // m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-status') + ': '),
-        m('span', this.inviteData.status == 1 ? '通过' : this.inviteData.status == 2 ? '拒绝' : '未审核'),
+        m('span' + (this.inviteData.status == 1 ? '.green' : this.inviteData.status == 2 ? '.red' :'default'), this.inviteData.status == 1 ? '通过' : this.inviteData.status == 2 ? '拒绝' : '未审核'),
         m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-time') + ': '),
         m('span', this.inviteData.confirmTime),

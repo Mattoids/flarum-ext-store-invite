@@ -35,9 +35,14 @@ UserAttributes
         $actor = $serializer->getActor();
 
         $canViewButton = $actor->can('mattoid-store-invite.group-view');
+        $blacklist = $actor->can('mattoid-store-invite.group-blacklist-view');
         $canAdminViewButton = $actor->can('mattoid-store-invite.group-admin-view');
 
-        $attributes['canInviteView'] = $canViewButton;
+        if (!$blacklist) {
+            $attributes['canInviteView'] = $canViewButton;
+        } else {
+            $attributes['canInviteView'] = false;
+        }
         $attributes['canInviteAdminView'] = $canAdminViewButton;
 
         return $attributes;
