@@ -37,6 +37,7 @@ class InviteSerializer extends AbstractSerializer
             'totalNum'  => $data->totalNum,
             'passTotalNum' => $data->passTotalNum,
             'inviteCode' => '',
+            'notes' => $data->notes,
         ];
 
         if ($data -> status == 1) {
@@ -46,6 +47,7 @@ class InviteSerializer extends AbstractSerializer
         if (!$this->actor->can('mattoid-store-invite.group-admin-view')) {
             $attributes["confirmUser"] = "";
             $attributes["confirmUserImg"] = "";
+            $attributes["notes"] = 0;
         }
 
         return $attributes;

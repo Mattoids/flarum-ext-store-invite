@@ -75,9 +75,22 @@ class ListInviteApplyController extends AbstractListController
                 $inviteUserMap[$item->user_id] = $item;
             }
 
+            $noteList = [];
+            if (class_exists("\FoF\ModeratorNotes\Model\ModeratorNote")) {
+                $result = \FoF\ModeratorNotes\Model\ModeratorNote::query()->where('user_id', $userIdList)->selectRaw("count(1) as total, user_id")->groupBy('user_id')->get();
+                foreach ($result as $note) {
+                    $noteList[$note->user_id] = $note->total;
+                }
+            }
+
             foreach ($list as $item) {
                 $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                 $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
+                if (isset($noteList[$item->user_id])) {
+                    $item['notes'] = $noteList[$item->user_id];
+                } else {
+                    $item['notes'] = 0;
+                }
             }
         }
 

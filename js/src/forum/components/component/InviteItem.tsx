@@ -30,7 +30,7 @@ export default class InviteItem extends Component {
         }, this.inviteData.confirmUser)),
         m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-status') + ': '),
-        m('span'  + (this.inviteData.status == 1 ? '.green' : this.inviteData.status == 2 ? '.red' :'default'), this.inviteData.status == 1 ? '通过' : this.inviteData.status == 2 ? '拒绝' : '未审核'),
+        m('span'  + (this.inviteData.status == 1 ? '.green' : this.inviteData.status == 2 ? '.red' :'.default'), this.inviteData.status == 1 ? '通过' : this.inviteData.status == 2 ? '拒绝' : '未审核'),
         m('span.horizontal-spacing', ' | '),
         m('label', app.translator.trans('mattoid-store-invite.lib.item-confirm-time') + ': '),
         m('span', this.inviteData.confirmTime),
@@ -99,11 +99,12 @@ export default class InviteItem extends Component {
         ]),
         m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-user') + ': '),
-          m('span', LinkButton.component({
+          m('span' + (this.inviteData.notes > 0 ? '.red' : ''), LinkButton.component({
             href: '/u/' + this.inviteData.user
           }, <img className="Invite-Icon" src={this.inviteData.userImg}/>)),
-          m('span', LinkButton.component({
-            href: '/u/' + this.inviteData.user
+          m('span' + (this.inviteData.notes > 0 ? '.red' : ''), LinkButton.component({
+            href: '/u/' + this.inviteData.user,
+            class: this.inviteData.notes > 0 ? 'red' : ''
           }, this.inviteData.user)),
           m('span.horizontal-spacing', ' | '),
           m('label', app.translator.trans('mattoid-store-invite.lib.item-email') + ': '),
