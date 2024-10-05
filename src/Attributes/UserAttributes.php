@@ -39,9 +39,9 @@ UserAttributes
 
         $groupIds = array_column(json_decode(json_encode($user->groups)), 'id');
         if ($user->can('mattoid-store-invite.group-blacklist-view') && !in_array('1', $groupIds)) {
-            $attributes['canInviteView'] = $canViewButton;
-        } else {
             $attributes['canInviteView'] = false;
+        } else {
+            $attributes['canInviteView'] = $canViewButton;
         }
         $attributes['canInviteAdminView'] = $canAdminViewButton;
 
