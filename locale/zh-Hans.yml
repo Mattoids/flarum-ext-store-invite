@@ -59,6 +59,8 @@ mattoid-store-invite:
       email-inconsistency: 邮箱与邀请信息不一致，请使用收到邀请码的邮箱
       username-inconsistency: 用户名与邀请信息不一致，请使用邮件中的用户名注册
       exception: 自动审核失败【{message}】
+      email-not-exist: 邮箱不可为空
+      link-not-exist: 受邀人个人主页链接不可为空
 
   lib:
     item-user: 发邀人

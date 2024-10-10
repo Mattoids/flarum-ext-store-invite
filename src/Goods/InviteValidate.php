@@ -40,6 +40,13 @@ class InviteValidate extends Validate
         $settings = resolve(SettingsRepositoryInterface::class);
         $translator = resolve(TranslatorInterface::class);
 
+        if (!$params['email']) {
+            throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-not-exist')]);
+        }
+        if (!$params['link']) {
+            throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.link-not-exist')]);
+        }
+
         $key = md5("confirm-{$params['email']}");
         if (!$cache->add($key, $params['email'], 30)) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.lock-resources')]);
