@@ -16,6 +16,7 @@ use Mattoid\Store\Event\StoreInvalidEvent;
 use Mattoid\Store\Extend\StoreExtend;
 use Mattoid\StoreInvite\Attributes\UserAttributes;
 use Mattoid\StoreInvite\Console\Command\AutoReviewCommand;
+use Mattoid\StoreInvite\Console\Command\OuttimeDeleteCommand;
 use Mattoid\StoreInvite\Console\PublishSchedule;
 use Mattoid\StoreInvite\Controller\EditInviteConfirmController;
 use Mattoid\StoreInvite\Controller\ListInviteApplyController;
@@ -68,7 +69,9 @@ return [
 
     (new Extend\Console())
         ->command(AutoReviewCommand::class)
-        ->schedule(AutoReviewCommand::class, new PublishSchedule()),
+        ->command(OuttimeDeleteCommand::class)
+        ->schedule(AutoReviewCommand::class, new PublishSchedule())
+        ->schedule(OuttimeDeleteCommand::class, new PublishSchedule()),
 
     (new Extend\Settings())
         ->default('mattoid-store-invite.group', Group::MEMBER_ID),

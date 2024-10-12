@@ -78,7 +78,9 @@ class InviteValidate extends Validate
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }
 
-        $inviteValidate = InviteModel::query()->where('email', $params['email'])->whereIn('status', [0, 1])->first();
+        $outtime = $settings->get('mattoid-store-invite.invite-validity-period', 3);
+        $datetime = Carbon::now()->subDays($outtime)->tz($settingTimezone);
+        $inviteValidate = InviteModel::query()->where('email', $params['email'])->where('status', 1)->where('confirm_time', '>=', $datetime)->where('is_expire', 0)->first();
         if ($inviteValidate) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }

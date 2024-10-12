@@ -57,6 +57,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: 0
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.invite-validity-period',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.invite-validity-period-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.invite-validity-period'),
+      type: 'number',
+      default: 0
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.price',
       help: app.translator.trans('mattoid-store-invite.admin.settings.price-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.price'),

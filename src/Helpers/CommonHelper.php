@@ -58,6 +58,7 @@ class CommonHelper
             $doorkey->save();
 
             // 发送邀请码
+            $invite->doorkey_id = $doorkey->id;
             $events->dispatch(new InviteEvent($user, $invite));
         }
 
@@ -71,4 +72,10 @@ class CommonHelper
         $cache->delete($key);
     }
 
+    public static function delete(User $actor, InviteModel $invite)
+    {
+        DeleteDoorkey($invite->doorkey_id, $actor);
+        $invite->is_expire = 1;
+        $invite->save();
+    }
 }

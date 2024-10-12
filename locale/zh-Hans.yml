@@ -5,6 +5,8 @@ mattoid-store-invite:
       group-admin-view: 审核权限
       calm-down-period-help: 申请被拒后，从拒绝之日起N天不允许重新申请
       calm-down-period: 申请冷静期(天)
+      invite-validity-period: 邀请码有效期(天)
+      invite-validity-period-help: 审核通过后开始计算超过时间的验证码会自动失效
       show-index: 添加到首页
       show-index-help: 审核菜单展示到首页
       price: 扣费

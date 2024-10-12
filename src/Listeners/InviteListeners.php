@@ -55,6 +55,7 @@ class InviteListeners
         $replace = [
             '[user]' => $invite->username,
             '[code]' => $inviteCode,
+            '[outtime]' => $this->settings->get('mattoid-store-invite.invite-validity-period', 3),
         ];
 
         $body = $this->settings->get('mattoid-store-invite.mail');
