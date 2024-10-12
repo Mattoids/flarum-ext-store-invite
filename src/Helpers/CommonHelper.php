@@ -58,11 +58,9 @@ class CommonHelper
             $doorkey = Doorkey::build($invite->invite_code, $settings->get('mattoid-store-invite.group', Group::MEMBER_ID), 1, false);
             $doorkey->save();
 
-            app('log')->info(json_encode($doorkey));
 
             // 发送邀请码
             $invite->doorkey_id = $doorkey->id;
-            app('log')->info(json_encode($invite));
             $events->dispatch(new InviteEvent($user, $invite));
         }
 
@@ -71,7 +69,6 @@ class CommonHelper
         $invite->status = $params['status'];
         $invite->confirm_time = Carbon::now()->tz($settingTimezone);
         $invite->updated_at = Carbon::now()->tz($settingTimezone);
-        app('log')->info(json_encode($invite));
         $invite->save();
 
         $cache->delete($key);

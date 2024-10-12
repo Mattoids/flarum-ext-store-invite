@@ -45,7 +45,7 @@ class InviteListeners
             throw new ValidationException(['message' => $this->translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }
 
-//        $this->sendInvites($invite, $invite->invite_code);
+        $this->sendInvites($invite, $invite->invite_code);
 
         $this->cache->delete($key);
     }
