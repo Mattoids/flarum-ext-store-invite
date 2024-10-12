@@ -74,7 +74,7 @@ class CommonHelper
         $cache->delete($key);
     }
 
-    public static function delete(User $actor, InviteModel $invite)
+    public static function delete(InviteModel $invite)
     {
         Doorkey::query()->where('id', $invite->doorkey_id)->delete();
         $invite->is_expire = 1;

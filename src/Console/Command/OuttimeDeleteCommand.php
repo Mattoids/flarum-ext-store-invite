@@ -51,10 +51,9 @@ class OuttimeDeleteCommand extends AbstractCommand
             return;
         }
 
-        $user = User::query()->where('username', $this->settings->get('mattoid-store-invite.auto.review.username', 'admin'))->first();
         foreach ($inviteList as $invite) {
             try {
-                CommonHelper::delete($user, $invite);
+                CommonHelper::delete($invite);
             } catch (\Exception $e) {
                 $this->error($this->translator->trans('mattoid-store-invite.forum.error.exception', ['massage' => $e->getMessage()]));
             }
