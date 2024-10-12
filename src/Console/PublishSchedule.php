@@ -15,6 +15,7 @@ class PublishSchedule
 
         // 设置时间
         $event->everyFiveMinutes()->withoutOverlapping()->timezone($settingTimezone);
+//        $event->everyMinute()->withoutOverlapping()->timezone($settingTimezone);
 
         $paths = resolve(Paths::class);
         $event->appendOutputTo($paths->storage.(DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'mattoid-store-invite.log'));

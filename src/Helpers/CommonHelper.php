@@ -8,6 +8,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\User;
 use Flarum\Group\Group;
 use FoF\Doorman\Doorkey;
+use FoF\Doorman\Commands\DeleteDoorkey;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Mattoid\StoreInvite\Event\InviteEvent;
@@ -57,8 +58,11 @@ class CommonHelper
             $doorkey = Doorkey::build($invite->invite_code, $settings->get('mattoid-store-invite.group', Group::MEMBER_ID), 1, false);
             $doorkey->save();
 
+            app('log')->info(json_encode($doorkey));
+
             // 发送邀请码
             $invite->doorkey_id = $doorkey->id;
+            app('log')->info(json_encode($invite));
             $events->dispatch(new InviteEvent($user, $invite));
         }
 
@@ -67,6 +71,7 @@ class CommonHelper
         $invite->status = $params['status'];
         $invite->confirm_time = Carbon::now()->tz($settingTimezone);
         $invite->updated_at = Carbon::now()->tz($settingTimezone);
+        app('log')->info(json_encode($invite));
         $invite->save();
 
         $cache->delete($key);
@@ -74,7 +79,7 @@ class CommonHelper
 
     public static function delete(User $actor, InviteModel $invite)
     {
-        DeleteDoorkey($invite->doorkey_id, $actor);
+        Doorkey::query()->where('id', $invite->doorkey_id)->delete();
         $invite->is_expire = 1;
         $invite->save();
     }

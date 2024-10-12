@@ -45,6 +45,7 @@ class OuttimeDeleteCommand extends AbstractCommand
         $outtime = $this->settings->get('mattoid-store-invite.invite-validity-period', 3);
         $datetime = Carbon::now()->subDays($outtime)->tz($this->storeTimezone);
         $inviteList = InviteModel::query()->where('confirm_time','<=', $datetime)->where('status', 1)->where('is_expire', 0)->get();
+        $this->info(json_encode($inviteList));
         // 没有超时的邀请码，直接跳过本次任务
         if (!$inviteList) {
             return;
