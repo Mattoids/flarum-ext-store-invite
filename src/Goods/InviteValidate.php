@@ -78,7 +78,7 @@ class InviteValidate extends Validate
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }
 
-        $inviteValidate = InviteModel::query()->where('email', $params['email'])->where('is_expire', 0)->first();
+        $inviteValidate = InviteModel::query()->where('email', $params['email'])->whereIn('status', [0,1])->where('is_expire', 0)->first();
         if ($inviteValidate) {
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.email-exist')]);
         }
