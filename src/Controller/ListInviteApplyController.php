@@ -9,6 +9,7 @@ use Flarum\Http\UrlGenerator;
 use Flarum\Locale\Translator;
 use Flarum\User\UserRepository;
 use Illuminate\Support\Arr;
+use Flarum\Post\Post;
 use Mattoid\StoreInvite\Model\InviteModel;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Mattoid\StoreInvite\Serializer\InviteSerializer;
@@ -80,7 +81,10 @@ class ListInviteApplyController extends AbstractListController
                 $inviteUserMap[$item->user_id] = $item;
             }
 
-//            $postList = Post::query()->selectRaw("count(1) as postNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
+            $postList = Post::query()->selectRaw("count(1) as postNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
+            foreach ($postList as $item) {
+                $postListMap[$item->user_id] = $item;
+            }
 
             $noteList = [];
             if (class_exists("\FoF\ModeratorNotes\Model\ModeratorNote")) {
@@ -91,6 +95,7 @@ class ListInviteApplyController extends AbstractListController
             }
 
             foreach ($list as $item) {
+                $item['postNum'] = $postListMap[$item->user_id]->postNum ?? 0;
                 $item['userCreateTime'] = Carbon::parse($item->user->joined_at, $this->storeTimezone)->format('Y-m-d');
                 $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                 $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
