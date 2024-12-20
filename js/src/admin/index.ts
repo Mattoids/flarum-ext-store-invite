@@ -71,6 +71,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: 0
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.post-num',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.post-num-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.post-num'),
+      type: 'number',
+      default: 20
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.group',
       help: app.translator.trans('mattoid-store-invite.admin.settings.group-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.group'),

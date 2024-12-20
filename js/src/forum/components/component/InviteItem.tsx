@@ -107,6 +107,9 @@ export default class InviteItem extends Component {
             class: this.inviteData.notes > 0 ? 'red' : ''
           }, this.inviteData.user)),
           m('span.horizontal-spacing', ' | '),
+          m('label', app.translator.trans('mattoid-store-invite.lib.item-post-num') + ': '),
+          m('span' + (this.inviteData.postNum < app.forum.attribute("postNum") ? '.red' : ''), this.inviteData.postNum),
+          m('span.horizontal-spacing', ' | '),
           m('label', app.translator.trans('mattoid-store-invite.lib.item-email') + ': '),
           m('span', this.inviteData.email),
           m('span.horizontal-spacing', ' | '),
@@ -119,6 +122,9 @@ export default class InviteItem extends Component {
           m('span.horizontal-spacing', ' | '),
           m('label', app.translator.trans('mattoid-store-invite.lib.item-pass-total-num') + ': '),
           m('span', this.inviteData.passTotalNum),
+          m('span.horizontal-spacing', ' | '),
+          m('label', app.translator.trans('mattoid-store-invite.lib.item-user-create-time') + ': '),
+          m('span', this.inviteData.userCreateTime),
         ]),
         m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-link') + ': '),

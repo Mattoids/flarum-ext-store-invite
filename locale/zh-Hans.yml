@@ -27,6 +27,8 @@ mattoid-store-invite:
       group-blacklist-view: 黑名单用户组（该用户组的用户将无法购买商品）
       group: 注册用户组
       group-help: 用户注册后默认是该用户组成员
+      post-num: 发帖数量
+      post-num-help: 发帖数量小于当前值时，审核页面该值将显示为红色
 
   forum:
     title: 邀请码
@@ -90,3 +92,6 @@ mattoid-store-invite:
     item-pass-total-num: 累计已通过次数
 
     item-invite-code: 邀请码
+
+    item-post-num: 帖子数
+    item-user-create-time: 发邀人注册时间

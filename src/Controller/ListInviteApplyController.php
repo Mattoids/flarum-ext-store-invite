@@ -2,6 +2,7 @@
 
 namespace Mattoid\StoreInvite\Controller;
 
+use Carbon\Carbon;
 use Flarum\Api\Controller\AbstractListController;
 use Flarum\Http\RequestUtil;
 use Flarum\Http\UrlGenerator;
@@ -9,6 +10,7 @@ use Flarum\Locale\Translator;
 use Flarum\User\UserRepository;
 use Illuminate\Support\Arr;
 use Mattoid\StoreInvite\Model\InviteModel;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Mattoid\StoreInvite\Serializer\InviteSerializer;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
@@ -21,11 +23,14 @@ class ListInviteApplyController extends AbstractListController
      */
     public $serializer = InviteSerializer::class;
 
-    public function __construct(UserRepository $repository, UrlGenerator $url, Translator $translator)
+    public function __construct(SettingsRepositoryInterface $settings, UserRepository $repository, UrlGenerator $url, Translator $translator)
     {
         $this->url = $url;
         $this->translator = $translator;
         $this->repository = $repository;
+
+        $storeTimezone = $settings->get('mattoid-store.storeTimezone', 'Asia/Shanghai');
+        $this->storeTimezone = !!$storeTimezone ? $storeTimezone : 'Asia/Shanghai';
     }
 
     protected function data(ServerRequestInterface $request, Document $document)
@@ -75,6 +80,8 @@ class ListInviteApplyController extends AbstractListController
                 $inviteUserMap[$item->user_id] = $item;
             }
 
+//            $postList = Post::query()->selectRaw("count(1) as postNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
+
             $noteList = [];
             if (class_exists("\FoF\ModeratorNotes\Model\ModeratorNote")) {
                 $result = \FoF\ModeratorNotes\Model\ModeratorNote::query()->whereIn('user_id', $userIdList)->selectRaw("count(1) as total, user_id")->groupBy('user_id')->get();
@@ -84,6 +91,7 @@ class ListInviteApplyController extends AbstractListController
             }
 
             foreach ($list as $item) {
+                $item['userCreateTime'] = Carbon::parse($item->user->joined_at, $this->storeTimezone)->format('Y-m-d');
                 $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                 $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
                 if ($noteList[$item->user_id]) {

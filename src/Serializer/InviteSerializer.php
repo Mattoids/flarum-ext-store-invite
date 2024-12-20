@@ -38,6 +38,8 @@ class InviteSerializer extends AbstractSerializer
             'passTotalNum' => $data->passTotalNum,
             'inviteCode' => '',
             'notes' => $data->notes,
+            'postNum' => 0,
+            'userCreateTime' => $data->userCreateTime,
         ];
 
         if ($data -> status == 1) {

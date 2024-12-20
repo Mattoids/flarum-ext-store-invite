@@ -61,6 +61,7 @@ return [
         ->attributes(UserAttributes::class),
 
     (new Extend\Settings())
+        ->serializeToForum('postNum', 'mattoid-store-invite.post-num')
         ->serializeToForum('inviteShowIndex', 'mattoid-store-invite.show-index'),
 
     (new Extend\Routes('api'))
