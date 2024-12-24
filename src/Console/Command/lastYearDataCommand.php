@@ -39,7 +39,7 @@ class lastYearDataCommand extends AbstractCommand
         $year = Carbon::now()->tz($this->storeTimezone)->subYear()->year;
         $startTime = Carbon::now()->tz($this->storeTimezone)->subYear()->firstOfYear();
         $endTime = Carbon::now()->tz($this->storeTimezone)->subYear()->endOfYear();
-        $inviteList = InviteModel::query()->selectRaw("user_id, count(1) as total, SUM(IF(status = 1, 1, 0)) as pass")->where('confirm_time', '>=', $startTime)->where('confirm_time','<=', $endTime)->groupBy("user_id")->get();
+        $inviteList = InviteModel::query()->selectRaw("user_id, count(1) as total, SUM(IF(status = 1, 1, 0)) as pass")->where('created_at', '>=', $startTime)->where('created_at','<=', $endTime)->groupBy("user_id")->get();
         if (!$inviteList || count($inviteList) == 0) {
             return;
         }
