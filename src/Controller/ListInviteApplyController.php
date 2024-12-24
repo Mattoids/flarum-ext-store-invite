@@ -10,6 +10,7 @@ use Flarum\Locale\Translator;
 use Flarum\User\UserRepository;
 use Illuminate\Support\Arr;
 use Flarum\Post\Post;
+use Mattoid\StoreInvite\Model\InviteHistoryModel;
 use Mattoid\StoreInvite\Model\InviteModel;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Mattoid\StoreInvite\Serializer\InviteSerializer;
@@ -86,6 +87,12 @@ class ListInviteApplyController extends AbstractListController
                 $postListMap[$item->user_id] = $item;
             }
 
+            $inviteHistoryMap = [];
+            $inviteHistory = InviteHistoryModel::query()->whereIn('user_id', $userIdList)->where("year", Carbon::now()->format("Y"))->get();
+            foreach ($inviteHistory as $item) {
+                $inviteHistoryMap[$item->user_id] = $item;
+            }
+
             $noteList = [];
             if (class_exists("\FoF\ModeratorNotes\Model\ModeratorNote")) {
                 $result = \FoF\ModeratorNotes\Model\ModeratorNote::query()->whereIn('user_id', $userIdList)->selectRaw("count(1) as total, user_id")->groupBy('user_id')->get();
@@ -97,8 +104,14 @@ class ListInviteApplyController extends AbstractListController
             foreach ($list as $item) {
                 $item['postNum'] = $postListMap[$item->user_id]->postNum ?? 0;
                 $item['userCreateTime'] = Carbon::parse($item->user->joined_at, $this->storeTimezone)->format('Y-m-d');
-                $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
-                $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
+                if ($inviteUserMap[$item->user_id]) {
+                    $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
+                    $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
+                }
+                if ($inviteHistoryMap[$item->user_id]) {
+                    $item['lastYearApply'] = $inviteHistoryMap[$item->user_id]->apply;
+                    $item['lastYearPass'] = $inviteHistoryMap[$item->user_id]->pass;
+                }
                 if ($noteList[$item->user_id]) {
                     $item['notes'] = $noteList[$item->user_id];
                 } else {

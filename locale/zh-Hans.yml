@@ -95,3 +95,6 @@ mattoid-store-invite:
 
     item-post-num: 帖子数
     item-user-create-time: 发邀人注册时间
+
+    item-last-year-total-num: 上年度提交次数
+    item-last-year-pass-num: 上年度通过次数

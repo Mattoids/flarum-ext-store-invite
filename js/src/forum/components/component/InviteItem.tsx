@@ -127,6 +127,13 @@ export default class InviteItem extends Component {
           m('span', this.inviteData.userCreateTime),
         ]),
         m('div.spacing', [
+          m('label', app.translator.trans('mattoid-store-invite.lib.item-last-year-total-num') + ': '),
+          m('span', this.inviteData.lastYearApply),
+          m('span.horizontal-spacing', ' | '),
+          m('label', app.translator.trans('mattoid-store-invite.lib.item-last-year-pass-num') + ': '),
+          m('span', this.inviteData.lastYearPass),
+        ]),
+        m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-link') + ': '),
           m('span', LinkButton.component({
             href: this.inviteData.link

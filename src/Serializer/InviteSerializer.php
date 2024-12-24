@@ -40,6 +40,8 @@ class InviteSerializer extends AbstractSerializer
             'notes' => $data->notes,
             'postNum' => $data->postNum,
             'userCreateTime' => $data->userCreateTime,
+            'lastYearApply' => $data->lastYearApply,
+            'lastYearPass' => $data->lastYearPass,
         ];
 
         if ($data -> status == 1) {
