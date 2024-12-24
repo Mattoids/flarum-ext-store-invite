@@ -88,7 +88,7 @@ class ListInviteApplyController extends AbstractListController
             }
 
             $inviteHistoryMap = [];
-            $inviteHistory = InviteHistoryModel::query()->whereIn('user_id', $userIdList)->where("year", Carbon::now()->format("Y"))->get();
+            $inviteHistory = InviteHistoryModel::query()->whereIn('user_id', $userIdList)->where("year", Carbon::now()->tz($this->storeTimezone)->year)->get();
             foreach ($inviteHistory as $item) {
                 $inviteHistoryMap[$item->user_id] = $item;
             }

@@ -20,6 +20,12 @@ php flarum migrate
 php flarum cache:clear
 ```
 
+## Generate data for the previous year
+
+```sh
+php flarum mattoid:store:invite:lastYear:data
+```
+
 ## Links
 
 - [Packagist](https://packagist.org/packages/mattoid/flarum-ext-store-invite)

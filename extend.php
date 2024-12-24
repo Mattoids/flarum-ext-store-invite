@@ -16,7 +16,9 @@ use Mattoid\Store\Event\StoreInvalidEvent;
 use Mattoid\Store\Extend\StoreExtend;
 use Mattoid\StoreInvite\Attributes\UserAttributes;
 use Mattoid\StoreInvite\Console\Command\AutoReviewCommand;
+use Mattoid\StoreInvite\Console\Command\lastYearDataCommand;
 use Mattoid\StoreInvite\Console\Command\OuttimeDeleteCommand;
+use Mattoid\StoreInvite\Console\LestYearSchedule;
 use Mattoid\StoreInvite\Console\PublishSchedule;
 use Mattoid\StoreInvite\Controller\EditInviteConfirmController;
 use Mattoid\StoreInvite\Controller\ListInviteApplyController;
@@ -71,7 +73,9 @@ return [
     (new Extend\Console())
         ->command(AutoReviewCommand::class)
         ->command(OuttimeDeleteCommand::class)
+        ->command(lastYearDataCommand::class)
         ->schedule(AutoReviewCommand::class, new PublishSchedule())
+        ->schedule(lastYearDataCommand::class, new LestYearSchedule())
         ->schedule(OuttimeDeleteCommand::class, new PublishSchedule()),
 
     (new Extend\Settings())
