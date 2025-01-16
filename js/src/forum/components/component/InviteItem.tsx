@@ -84,7 +84,7 @@ export default class InviteItem extends Component {
               onclick: () => {
                 if (this.buttonName == 'expand') {
                   this.buttonName = 'retract'
-                  this.class = ' .my.extended'
+                  this.class = ' .to.extended'
                   if (this.inviteData.status == 0) {
                     this.class = ' .article.extended'
                   }
