@@ -13,8 +13,10 @@ use Illuminate\Contracts\Cache\Repository;
 
 class lastYearDataCommand extends AbstractCommand
 {
+    protected $cache;
     protected $events;
     protected $settings;
+    protected $translator;
 
     private $storeTimezone = 'Asia/Shanghai';
 

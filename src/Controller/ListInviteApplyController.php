@@ -20,10 +20,15 @@ use Flarum\User\User;
 
 class ListInviteApplyController extends AbstractListController
 {
+    protected $translator;
+    protected $repository;
+    protected $url;
+
     /**
      * {@inheritdoc}
      */
     public $serializer = InviteSerializer::class;
+    private $storeTimezone = 'Asia/Shanghai';
 
     public function __construct(SettingsRepositoryInterface $settings, UserRepository $repository, UrlGenerator $url, Translator $translator)
     {

@@ -19,8 +19,10 @@ use Mattoid\Store\Model\StoreModel;
 
 class AutoReviewCommand extends AbstractCommand
 {
+    protected $cache;
     protected $events;
     protected $settings;
+    protected $translator;
 
     private $storeTimezone = 'Asia/Shanghai';
 

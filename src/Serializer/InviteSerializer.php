@@ -7,6 +7,7 @@ use Flarum\Locale\Translator;
 
 class InviteSerializer extends AbstractSerializer
 {
+    protected $translator;
 
     public function __construct(Translator $translator)
     {

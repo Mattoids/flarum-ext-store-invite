@@ -23,10 +23,12 @@ class EditInviteConfirmController extends AbstractListController
 
     public $serializer = InviteSerializer::class;
 
+    protected $repository;
     protected $translator;
     protected $settings;
     protected $events;
     protected $cache;
+    protected $url;
 
 
     public function __construct(SettingsRepositoryInterface $settings, UserRepository $repository, Dispatcher $events, UrlGenerator $url, Translator $translator, CacheContract $cache)
