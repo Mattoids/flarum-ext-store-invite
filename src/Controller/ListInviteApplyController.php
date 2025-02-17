@@ -109,15 +109,15 @@ class ListInviteApplyController extends AbstractListController
             foreach ($list as $item) {
                 $item['postNum'] = $postListMap[$item->user_id]->postNum ?? 0;
                 $item['userCreateTime'] = Carbon::parse($item->user->joined_at, $this->storeTimezone)->format('Y-m-d');
-                if ($inviteUserMap[$item->user_id]) {
+                if ($inviteUserMap && $inviteUserMap[$item->user_id]) {
                     $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                     $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
                 }
-                if ($inviteHistoryMap[$item->user_id]) {
+                if ($inviteHistoryMap && $inviteHistoryMap[$item->user_id]) {
                     $item['lastYearApply'] = $inviteHistoryMap[$item->user_id]->apply;
                     $item['lastYearPass'] = $inviteHistoryMap[$item->user_id]->pass;
                 }
-                if ($noteList[$item->user_id]) {
+                if ($noteList && $noteList[$item->user_id]) {
                     $item['notes'] = $noteList[$item->user_id];
                 } else {
                     $item['notes'] = 0;
