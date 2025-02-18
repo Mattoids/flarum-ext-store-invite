@@ -90,6 +90,7 @@ mattoid-store-invite:
 
     item-total-num: 累计已提交次数
     item-pass-total-num: 累计已通过次数
+    item-reject-total-num: 累计拒绝次数
 
     item-invite-code: 邀请码
 
@@ -98,3 +99,8 @@ mattoid-store-invite:
 
     item-last-year-total-num: 上年度提交次数
     item-last-year-pass-num: 上年度通过次数
+    item-last-year-reject-num: 上年度拒绝次数
+
+    item-this-year-total-num: 今年提交次数
+    item-this-year-pass-num: 今年通过次数
+    item-this-year-reject-num: 今年拒绝次数

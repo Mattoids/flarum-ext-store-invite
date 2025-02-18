@@ -82,7 +82,7 @@ class ListInviteApplyController extends AbstractListController
                 $userIdList[] = $item->user->id;
             }
             $inviteUserMap = [];
-            $inviteUserList = InviteModel::query()->selectRaw("count(1) as totalNum, sum(IF(status = 1, 1, 0)) as passTotalNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
+            $inviteUserList = InviteModel::query()->selectRaw("count(1) as totalNum, sum(IF(status = 1, 1, 0)) as passTotalNum, sum(IF(status = 2, 1, 0)) as totalRejectlNum, user_id")->whereIn('user_id', $userIdList)->groupBy('user_id')->get();
             foreach ($inviteUserList as $item) {
                 $inviteUserMap[$item->user_id] = $item;
             }
@@ -96,6 +96,12 @@ class ListInviteApplyController extends AbstractListController
             $inviteHistory = InviteHistoryModel::query()->whereIn('user_id', $userIdList)->where("year", Carbon::now()->tz($this->storeTimezone)->subYear()->year)->get();
             foreach ($inviteHistory as $item) {
                 $inviteHistoryMap[$item->user_id] = $item;
+            }
+
+            $inviteListMap = [];
+            $inviteList = InviteModel::query()->selectRaw("sum(IF(status = 1, 1, 0)) as passTotalNum, sum(IF(status = 2, 1, 0)) as totalRejectlNum, user_id")->whereIn('user_id', $userIdList)->where('confirm_time', '>=', Carbon::now()->tz($this->storeTimezone)->startOfYear())->groupBy('user_id')->get();
+            foreach ($inviteList as $item) {
+                $inviteListMap[$item->user_id] = $item;
             }
 
             $noteList = [];
@@ -112,10 +118,15 @@ class ListInviteApplyController extends AbstractListController
                 if ($inviteUserMap && $inviteUserMap[$item->user_id]) {
                     $item['totalNum'] = $inviteUserMap[$item->user_id]->totalNum;
                     $item['passTotalNum'] = $inviteUserMap[$item->user_id]->passTotalNum;
+                    $item['totalRejectlNum'] = $inviteUserMap[$item->user_id]->totalRejectlNum;
                 }
                 if ($inviteHistoryMap && $inviteHistoryMap[$item->user_id]) {
                     $item['lastYearApply'] = $inviteHistoryMap[$item->user_id]->apply;
                     $item['lastYearPass'] = $inviteHistoryMap[$item->user_id]->pass;
+                }
+                if ($inviteListMap && $inviteListMap[$item->user_id]) {
+                    $item['thisYearPass'] = $inviteListMap[$item->user_id]->passTotalNum;
+                    $item['thisRejectlNum'] = $inviteListMap[$item->user_id]->totalRejectlNum;
                 }
                 if ($noteList && $noteList[$item->user_id]) {
                     $item['notes'] = $noteList[$item->user_id];

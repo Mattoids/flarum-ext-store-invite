@@ -43,6 +43,9 @@ class InviteSerializer extends AbstractSerializer
             'userCreateTime' => $data->userCreateTime,
             'lastYearApply' => $data->lastYearApply,
             'lastYearPass' => $data->lastYearPass,
+            'totalRejectlNum' => $data->totalRejectlNum,
+            'thisYearPass' => $data->thisYearPass,
+            'thisRejectlNum' => $data->thisRejectlNum,
         ];
 
         if ($data -> status == 1) {
