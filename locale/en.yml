@@ -93,6 +93,8 @@ mattoid-store-invite:
     item-post-num: Post Num
     item-user-create-time: User Joined Time
 
+    item-create-time: Create Date
+
     item-last-year-total-num: Number of submissions in the previous year
     item-last-year-pass-num: Number of Passes in Last Year
     item-last-year-reject-num: Number of Reject in Last Year

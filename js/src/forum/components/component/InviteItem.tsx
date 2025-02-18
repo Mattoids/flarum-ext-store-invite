@@ -114,7 +114,10 @@ export default class InviteItem extends Component {
           m('span', this.inviteData.email),
           m('span.horizontal-spacing', ' | '),
           m('label', app.translator.trans('mattoid-store-invite.lib.item-username') + ': '),
-          m('span', this.inviteData.username)
+          m('span', this.inviteData.username),
+          m('span.horizontal-spacing', ' | '),
+          m('label', app.translator.trans('mattoid-store-invite.lib.item-create-time') + ': '),
+          m('span', this.inviteData.createdAt)
         ]),
         m('div.spacing', [
           m('label', app.translator.trans('mattoid-store-invite.lib.item-total-num') + ': '),
