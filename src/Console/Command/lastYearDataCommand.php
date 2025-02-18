@@ -48,10 +48,12 @@ class lastYearDataCommand extends AbstractCommand
 
         $inviteData = [];
         foreach ($inviteList as $invite) {
-            $inviteData['user_id'] = $invite->user_id;
-            $inviteData['year'] = $year;
-            $inviteData['apply'] = $invite->total;
-            $inviteData['pass'] = $invite->pass;
+            $data['user_id'] = $invite->user_id;
+            $data['year'] = $year;
+            $data['apply'] = $invite->total;
+            $data['pass'] = $invite->pass;
+
+            $inviteData[] = $data;
         }
 
         InviteHistoryModel::query()->where('year', $year)->delete();
