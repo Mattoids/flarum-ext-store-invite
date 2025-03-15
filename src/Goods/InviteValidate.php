@@ -67,6 +67,13 @@ class InviteValidate extends Validate
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-failed', ['date' => $date])]);
         }
 
+        $timeSuccess = Carbon::now()->subDays($settings->get('mattoid-store-invite.invite-calm-down-period', 0))->tz($settingTimezone);
+        $inviteSuccess = InviteModel::query()->where('user_id', $user->id)->where('confirm_time', '>=', $timeSuccess)->where('status', 1)->orderByDesc('created_at')->first();
+        if ($inviteSuccess) {
+            $date = Carbon::parse($inviteSuccess->confirm_time)->addDays($settings->get('mattoid-store-invite.invite-calm-down-period', 0))->tz($settingTimezone);
+            throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-success', ['date' => $date])]);
+        }
+
         // 受邀人是否存在
         $user = User::query()->where(function($where) use ($params) {
             $where->where('email', $params['email']);

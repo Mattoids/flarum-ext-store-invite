@@ -50,6 +50,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       default: 'admin'
     })
     .registerSetting({
+      setting: 'mattoid-store-invite.invite-calm-down-period',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.invite-calm-down-period-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.invite-calm-down-period'),
+      type: 'number',
+      default: 0
+    })
+    .registerSetting({
       setting: 'mattoid-store-invite.calm-down-period',
       help: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period-help'),
       label: app.translator.trans('mattoid-store-invite.admin.settings.calm-down-period'),
