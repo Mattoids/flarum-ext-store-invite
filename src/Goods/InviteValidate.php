@@ -74,6 +74,14 @@ class InviteValidate extends Validate
             throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.review-success', ['date' => $date])]);
         }
 
+        // 黑名单用户
+        if (class_exists('\Mattoid\Blacklist\Model\BlacklistModel')) {
+            $blacklist = \Mattoid\Blacklist\Model\BlacklistModel::query()->where('email', $params['email'])->first();
+            if ($blacklist) {
+                throw new ValidationException(['message' => $translator->trans('mattoid-store-invite.forum.error.blacklist')]);
+            }
+        }
+
         // 受邀人是否存在
         $user = User::query()->where(function($where) use ($params) {
             $where->where('email', $params['email']);

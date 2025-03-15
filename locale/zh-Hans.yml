@@ -68,6 +68,7 @@ mattoid-store-invite:
       exception: 自动审核失败【{message}】
       email-not-exist: 邮箱不可为空
       link-not-exist: 受邀人个人主页链接不可为空
+      blacklist: 黑名单用户，禁止邀请！
 
   lib:
     item-user: 发邀人

@@ -63,6 +63,7 @@ mattoid-store-invite:
       exception: Automatic review failed [{message}]
       email-not-exist: Email cannot be empty
       link-not-exist: link of the invitee cannot be empty
+      blacklist: Blacklist users, invitations are prohibited!
 
   lib:
     item-user: Inviter
