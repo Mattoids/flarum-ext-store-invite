@@ -4,10 +4,10 @@ import settingsFields from "./components/InviteSettingsFields";
 
 app.initializers.add('mattoid/flarum-ext-store-invite', () => {
   // 主动注册到商店插件的管理端组件注册表：
-  // 注册后商店"添加/编辑商品"弹窗不再显示默认"商品描述"字段（描述由本拓展设置项管理）
+  // hideDefaultDesc: 商店"添加/编辑商品"弹窗不显示默认"商品描述"字段（描述由本拓展设置项管理）
   const adminRegistry = (app as any).storeAdminRegistry;
   if (adminRegistry) {
-    adminRegistry.goodsForm.register('invite', InviteGoodsForm);
+    adminRegistry.goodsForm.register('invite', InviteGoodsForm, { hideDefaultDesc: true });
   }
 
   app.extensionData.for("mattoid-store-invite")
