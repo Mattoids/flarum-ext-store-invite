@@ -64,7 +64,7 @@ export default function settingsFields(page) {
       </div>
 
       <div className="StoreInviteAdmin-section">{t('section-buy')}</div>
-      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
+      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--3">
         <div className="StoreInviteAdminField">
           <label>{t('price')}</label>
           <div className="helpText">{t('price-help')}</div>
@@ -74,6 +74,16 @@ export default function settingsFields(page) {
           <label>{t('post-num')}</label>
           <div className="helpText">{t('post-num-help')}</div>
           <input className="FormControl" type="number" min={0} bidi={setting('post-num')}/>
+        </div>
+        <div className="StoreInviteAdminField">
+          <label>{t('group')}</label>
+          <div className="helpText">{t('group-help')}</div>
+          <Select
+            className="FormControl"
+            options={groupOptions}
+            value={setting('group')() || '3'}
+            onchange={setting('group')}
+          />
         </div>
       </div>
 
@@ -120,17 +130,6 @@ export default function settingsFields(page) {
         <label>{t('mail')}</label>
         <div className="helpText">{t('mail-help')}</div>
         <textarea className="FormControl" rows={5} placeholder={t('mail-template')} bidi={setting('mail')}/>
-      </div>
-
-      <div className="StoreInviteAdminField StoreInviteAdminField--group">
-        <label>{t('group')}</label>
-        <div className="helpText">{t('group-help')}</div>
-        <Select
-          className="FormControl"
-          options={groupOptions}
-          value={setting('group')() || '3'}
-          onchange={setting('group')}
-        />
       </div>
     </div>
   );
