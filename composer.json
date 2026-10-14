@@ -28,6 +28,7 @@
             "category": "",
             "icon": {
                 "name": "",
+                "image": "assets/icon.png",
                 "color": "",
                 "backgroundColor": ""
             }
