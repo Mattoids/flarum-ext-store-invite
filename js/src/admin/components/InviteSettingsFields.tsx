@@ -8,6 +8,8 @@ import Select from 'flarum/common/components/Select';
  * 通过 registerSetting 回调注入 ExtensionPage 渲染，
  * 所有输入框复用页面自带的 setting(key) 流绑定，保存逻辑与官方设置完全一致。
  *
+ * 分区顺序：功能开关 → 购买与审核展示 → 冷静期与有效期 → 商品描述 → 邮件模板 → 注册用户组
+ *
  * @param page ExtensionPage 实例（registerSetting 回调中的 this）
  */
 export default function settingsFields(page) {
@@ -28,63 +30,6 @@ export default function settingsFields(page) {
 
   return (
     <div className="StoreInviteAdmin">
-      <div className="StoreInviteAdmin-section">{t('section-goods')}</div>
-      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
-        <div className="StoreInviteAdminField">
-          <label>{t('goods-desc')}</label>
-          <div className="helpText">{t('goods-desc-help')}</div>
-          <textarea className="FormControl" rows={3} bidi={setting('goods-desc')}/>
-        </div>
-        <div className="StoreInviteAdminField">
-          <label>{t('goods-no-permission-desc')}</label>
-          <div className="helpText">{t('goods-no-permission-desc-help')}</div>
-          <textarea className="FormControl" rows={3} bidi={setting('goods-no-permission-desc')}/>
-        </div>
-      </div>
-
-      <div className="StoreInviteAdmin-section">{t('section-limit')}</div>
-      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--3">
-        <div className="StoreInviteAdminField">
-          <label>{t('invite-calm-down-period')}</label>
-          <div className="helpText">{t('invite-calm-down-period-help')}</div>
-          <input className="FormControl" type="number" min={0} bidi={setting('invite-calm-down-period')}/>
-        </div>
-        <div className="StoreInviteAdminField">
-          <label>{t('calm-down-period')}</label>
-          <div className="helpText">{t('calm-down-period-help')}</div>
-          <input className="FormControl" type="number" min={0} bidi={setting('calm-down-period')}/>
-        </div>
-        <div className="StoreInviteAdminField">
-          <label>{t('invite-validity-period')}</label>
-          <div className="helpText">{t('invite-validity-period-help')}</div>
-          <input className="FormControl" type="number" min={0} bidi={setting('invite-validity-period')}/>
-        </div>
-      </div>
-
-      <div className="StoreInviteAdmin-section">{t('section-buy')}</div>
-      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
-        <div className="StoreInviteAdminField">
-          <label>{t('price')}</label>
-          <div className="helpText">{t('price-help')}</div>
-          <input className="FormControl" type="number" min={0} bidi={setting('price')}/>
-        </div>
-        <div className="StoreInviteAdminField">
-          <label>{t('post-num')}</label>
-          <div className="helpText">{t('post-num-help')}</div>
-          <input className="FormControl" type="number" min={0} bidi={setting('post-num')}/>
-        </div>
-      </div>
-      <div className="StoreInviteAdminField">
-        <label>{t('group')}</label>
-        <div className="helpText">{t('group-help')}</div>
-        <Select
-          className="FormControl"
-          options={groupOptions}
-          value={setting('group')() || '3'}
-          onchange={setting('group')}
-        />
-      </div>
-
       <div className="StoreInviteAdmin-section">{t('section-switch')}</div>
       <div className="StoreInviteAdmin-row StoreInviteAdmin-row--switches">
         <div className="StoreInviteAdminSwitch">
@@ -118,6 +63,53 @@ export default function settingsFields(page) {
         <input className="FormControl" type="text" bidi={setting('auto.review.username')}/>
       </div>
 
+      <div className="StoreInviteAdmin-section">{t('section-buy')}</div>
+      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
+        <div className="StoreInviteAdminField">
+          <label>{t('price')}</label>
+          <div className="helpText">{t('price-help')}</div>
+          <input className="FormControl" type="number" min={0} bidi={setting('price')}/>
+        </div>
+        <div className="StoreInviteAdminField">
+          <label>{t('post-num')}</label>
+          <div className="helpText">{t('post-num-help')}</div>
+          <input className="FormControl" type="number" min={0} bidi={setting('post-num')}/>
+        </div>
+      </div>
+
+      <div className="StoreInviteAdmin-section">{t('section-limit')}</div>
+      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--3">
+        <div className="StoreInviteAdminField">
+          <label>{t('invite-calm-down-period')}</label>
+          <div className="helpText">{t('invite-calm-down-period-help')}</div>
+          <input className="FormControl" type="number" min={0} bidi={setting('invite-calm-down-period')}/>
+        </div>
+        <div className="StoreInviteAdminField">
+          <label>{t('calm-down-period')}</label>
+          <div className="helpText">{t('calm-down-period-help')}</div>
+          <input className="FormControl" type="number" min={0} bidi={setting('calm-down-period')}/>
+        </div>
+        <div className="StoreInviteAdminField">
+          <label>{t('invite-validity-period')}</label>
+          <div className="helpText">{t('invite-validity-period-help')}</div>
+          <input className="FormControl" type="number" min={0} bidi={setting('invite-validity-period')}/>
+        </div>
+      </div>
+
+      <div className="StoreInviteAdmin-section">{t('section-goods')}</div>
+      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
+        <div className="StoreInviteAdminField">
+          <label>{t('goods-desc')}</label>
+          <div className="helpText">{t('goods-desc-help')}</div>
+          <textarea className="FormControl" rows={3} bidi={setting('goods-desc')}/>
+        </div>
+        <div className="StoreInviteAdminField">
+          <label>{t('goods-no-permission-desc')}</label>
+          <div className="helpText">{t('goods-no-permission-desc-help')}</div>
+          <textarea className="FormControl" rows={3} bidi={setting('goods-no-permission-desc')}/>
+        </div>
+      </div>
+
       <div className="StoreInviteAdmin-section">{t('section-mail')}</div>
       <div className="StoreInviteAdminField">
         <label>{t('mail-title')}</label>
@@ -128,6 +120,17 @@ export default function settingsFields(page) {
         <label>{t('mail')}</label>
         <div className="helpText">{t('mail-help')}</div>
         <textarea className="FormControl" rows={5} placeholder={t('mail-template')} bidi={setting('mail')}/>
+      </div>
+
+      <div className="StoreInviteAdminField StoreInviteAdminField--group">
+        <label>{t('group')}</label>
+        <div className="helpText">{t('group-help')}</div>
+        <Select
+          className="FormControl"
+          options={groupOptions}
+          value={setting('group')() || '3'}
+          onchange={setting('group')}
+        />
       </div>
     </div>
   );
