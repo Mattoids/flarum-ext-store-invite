@@ -10,7 +10,7 @@ import InvitePriceModal from './InvitePriceModal';
  *  - 有权限（canInviteView）：显示有权限商品描述
  *  - 无权限：显示无权限商品描述（样式上追加 StoreInvite-GoodsCard--noPermission）
  *
- * 商品介绍区域：鼠标悬停 1 秒后浮层展示完整描述，移出即隐藏。
+ * 商品介绍区域：鼠标悬停 0.5 秒后浮层展示完整描述，移出即隐藏。
  *
  * attrs:
  *  - item: 商店商品模型（store 行的 store 模型）

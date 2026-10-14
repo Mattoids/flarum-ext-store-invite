@@ -134,7 +134,7 @@
 .StoreInvite-GoodsCard {
   cursor: pointer;
 
-  /* 商品介绍区域：加大高度，支持鼠标滚轮滚动查看 */
+  /* 商品介绍区域：默认 110px，卡片高度不足时优先压缩本区域（可滚轮查看全部内容） */
   .StoreInvite-GoodsCard-descWrap {
     position: relative;
   }
@@ -144,12 +144,14 @@
     font-size: 14px;
     display: block;
     height: 110px;
+    min-height: 40px;
+    flex-shrink: 1;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 4px;
   }
 
-  /* 悬停 1 秒后展示的完整描述浮层 */
+  /* 悬停 0.5 秒后展示的完整描述浮层 */
   .StoreInvite-GoodsCard-descTip {
     position: absolute;
     left: 0;
