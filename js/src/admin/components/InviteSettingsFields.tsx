@@ -57,11 +57,6 @@ export default function settingsFields(page) {
           <div className="helpText">{t('auto-review-help')}</div>
         </div>
       </div>
-      <div className="StoreInviteAdminField StoreInviteAdminField--autoReviewUser">
-        <label>{t('auto-review-username')}</label>
-        <div className="helpText">{t('auto-review-username-help')}</div>
-        <input className="FormControl" type="text" bidi={setting('auto.review.username')}/>
-      </div>
 
       <div className="StoreInviteAdmin-section">{t('section-buy')}</div>
       <div className="StoreInviteAdmin-row StoreInviteAdmin-row--3">
@@ -85,6 +80,11 @@ export default function settingsFields(page) {
             onchange={setting('group')}
           />
         </div>
+      </div>
+      <div className="StoreInviteAdminField StoreInviteAdminField--autoReviewUser">
+        <label>{t('auto-review-username')}</label>
+        <div className="helpText">{t('auto-review-username-help')}</div>
+        <input className="FormControl" type="text" bidi={setting('auto.review.username')}/>
       </div>
 
       <div className="StoreInviteAdmin-section">{t('section-limit')}</div>
