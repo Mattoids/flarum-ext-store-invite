@@ -134,18 +134,24 @@
 .StoreInvite-GoodsCard {
   cursor: pointer;
 
-  /* 商品介绍区域：默认 110px，卡片高度不足时优先压缩本区域（可滚轮查看全部内容） */
+  /*
+   * 商品介绍区域：真正的 flex 项是 descWrap 包裹层（内部 desc 为固定内容高度），
+   * 收缩规则必须加在包裹层上——加在内层元素上会因 min-height:auto 的
+   * min-content 限制（包裹层内容高度）而无法收缩，导致底栏被挤出卡片。
+   * 默认 110px，卡片高度不足时优先压缩本区域（可滚轮查看全部内容）。
+   */
   .StoreInvite-GoodsCard-descWrap {
     position: relative;
+    height: 110px;
+    min-height: 40px;
+    flex-shrink: 1;
   }
 
   .StoreInvite-GoodsCard-desc {
     white-space: pre-line;
     font-size: 14px;
     display: block;
-    height: 110px;
-    min-height: 40px;
-    flex-shrink: 1;
+    height: 100%;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 4px;
