@@ -1,7 +1,6 @@
 import app from 'flarum/forum/app';
 import Component from 'flarum/common/Component';
 import InvitePriceModal from './InvitePriceModal';
-import InviteDescModal from './InviteDescModal';
 
 /**
  * 商店页商品卡片（注册到 app.storeRegistry.item，code = invite）
@@ -11,6 +10,8 @@ import InviteDescModal from './InviteDescModal';
  *  - 有权限（canInviteView）：显示有权限商品描述
  *  - 无权限：显示无权限商品描述（样式上追加 StoreInvite-GoodsCard--noPermission）
  *
+ * 商品介绍区域：鼠标悬停 1 秒后浮层展示完整描述，移出即隐藏。
+ *
  * attrs:
  *  - item: 商店商品模型（store 行的 store 模型）
  *  - onSuccess?: 购买成功后由商店页传入的回调（用于局部刷新库存等）
@@ -18,11 +19,18 @@ import InviteDescModal from './InviteDescModal';
 export default class InviteGoodsCard extends Component {
   private storeData: any = {};
 
+  private descTimer: any = null;
+  private showDescTip: boolean = false;
+
   oninit(vnode) {
     super.oninit(vnode);
 
     this.storeData = this.attrs.item.attributes;
     this.storeData.id = this.attrs.item.id;
+  }
+
+  onremove() {
+    this.clearDescTimer();
   }
 
   /**
@@ -68,13 +76,17 @@ export default class InviteGoodsCard extends Component {
             <source src={this.storeData.icon} type="video/webm"/>
           </video>
         </div>
-        <div className="StoreInvite-GoodsCard-descWrap" onclick={(e: MouseEvent) => this.showFullDesc(e)}>
+        <div className="StoreInvite-GoodsCard-descWrap"
+             onmouseenter={() => this.onDescEnter()}
+             onmouseleave={() => this.onDescLeave()}>
           <div className="StoreItem-desc StoreInvite-GoodsCard-desc">
             {this.goodsDesc()}
           </div>
-          <div className="StoreInvite-GoodsCard-descHint">
-            {app.translator.trans('mattoid-store-invite.forum.view-full-desc')}
-          </div>
+          {this.showDescTip ? (
+            <div className="StoreInvite-GoodsCard-descTip">
+              {this.goodsDesc()}
+            </div>
+          ) : null}
         </div>
         <div className="StoreItem-footer">
           <div className="StoreItem-priceGroup">
@@ -104,12 +116,31 @@ export default class InviteGoodsCard extends Component {
   }
 
   /**
-   * 点击商品介绍区域：打开完整描述弹窗（阻止冒泡，避免触发购买弹窗）
-   * 游客也可查看完整介绍，不限制登录。
+   * 鼠标移入商品介绍区域：1 秒后浮层展示完整描述
    */
-  showFullDesc(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    app.modal.show(InviteDescModal, {storeData: this.storeData, desc: this.goodsDesc()});
+  onDescEnter() {
+    this.clearDescTimer();
+    this.descTimer = setTimeout(() => {
+      this.showDescTip = true;
+      m.redraw();
+    }, 1000);
+  }
+
+  /**
+   * 鼠标移出商品介绍区域：立即隐藏浮层并取消计时
+   */
+  onDescLeave() {
+    this.clearDescTimer();
+    if (this.showDescTip) {
+      this.showDescTip = false;
+      m.redraw();
+    }
+  }
+
+  clearDescTimer() {
+    if (this.descTimer) {
+      clearTimeout(this.descTimer);
+      this.descTimer = null;
+    }
   }
 }

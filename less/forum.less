@@ -136,7 +136,7 @@
 
   /* 商品介绍区域：加大高度，支持鼠标滚轮滚动查看 */
   .StoreInvite-GoodsCard-descWrap {
-    cursor: pointer;
+    position: relative;
   }
 
   .StoreInvite-GoodsCard-desc {
@@ -146,25 +146,28 @@
     height: 110px;
     overflow-y: auto;
     overscroll-behavior: contain;
-    cursor: pointer;
     padding-right: 4px;
   }
 
-  .StoreInvite-GoodsCard-descHint {
-    font-size: 12px;
-    color: var(--primary-color);
-    text-align: right;
-    margin-top: 2px;
-  }
-}
-
-/* 完整介绍弹窗 */
-.StoreInvite-DescModal {
-  .StoreInvite-DescModal-content {
-    white-space: pre-line;
-    line-height: 1.6;
-    max-height: 60vh;
+  /* 悬停 1 秒后展示的完整描述浮层 */
+  .StoreInvite-GoodsCard-descTip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    margin-bottom: 6px;
+    max-height: 240px;
     overflow-y: auto;
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--body-bg);
+    border: 1px solid var(--control-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    padding: 10px 12px;
+    z-index: 100;
   }
 }
 
