@@ -1,6 +1,7 @@
 import app from 'flarum/forum/app';
 import Component from 'flarum/common/Component';
 import InvitePriceModal from './InvitePriceModal';
+import InviteDescModal from './InviteDescModal';
 
 /**
  * 商店页商品卡片（注册到 app.storeRegistry.item，code = invite）
@@ -67,8 +68,13 @@ export default class InviteGoodsCard extends Component {
             <source src={this.storeData.icon} type="video/webm"/>
           </video>
         </div>
-        <div className="StoreItem-desc StoreInvite-GoodsCard-desc">
-          {this.goodsDesc()}
+        <div className="StoreInvite-GoodsCard-descWrap" onclick={(e: MouseEvent) => this.showFullDesc(e)}>
+          <div className="StoreItem-desc StoreInvite-GoodsCard-desc">
+            {this.goodsDesc()}
+          </div>
+          <div className="StoreInvite-GoodsCard-descHint">
+            {app.translator.trans('mattoid-store-invite.forum.view-full-desc')}
+          </div>
         </div>
         <div className="StoreItem-footer">
           <div className="StoreItem-priceGroup">
@@ -95,5 +101,15 @@ export default class InviteGoodsCard extends Component {
     if (app.session.user) {
       app.modal.show(InvitePriceModal, {storeData: this.storeData, onSuccess: this.attrs.onSuccess});
     }
+  }
+
+  /**
+   * 点击商品介绍区域：打开完整描述弹窗（阻止冒泡，避免触发购买弹窗）
+   * 游客也可查看完整介绍，不限制登录。
+   */
+  showFullDesc(event: MouseEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+    app.modal.show(InviteDescModal, {storeData: this.storeData, desc: this.goodsDesc()});
   }
 }

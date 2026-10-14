@@ -134,8 +134,37 @@
 .StoreInvite-GoodsCard {
   cursor: pointer;
 
+  /* 商品介绍区域：加大高度，支持鼠标滚轮滚动查看 */
+  .StoreInvite-GoodsCard-descWrap {
+    cursor: pointer;
+  }
+
   .StoreInvite-GoodsCard-desc {
     white-space: pre-line;
+    font-size: 14px;
+    display: block;
+    height: 110px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    cursor: pointer;
+    padding-right: 4px;
+  }
+
+  .StoreInvite-GoodsCard-descHint {
+    font-size: 12px;
+    color: var(--primary-color);
+    text-align: right;
+    margin-top: 2px;
+  }
+}
+
+/* 完整介绍弹窗 */
+.StoreInvite-DescModal {
+  .StoreInvite-DescModal-content {
+    white-space: pre-line;
+    line-height: 1.6;
+    max-height: 60vh;
+    overflow-y: auto;
   }
 }
 

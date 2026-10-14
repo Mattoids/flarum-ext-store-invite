@@ -45,6 +45,7 @@ mattoid-store-invite:
     goods-desc: Apply for an invitation slot. Fill in the invitee's information and once approved, the invite code will be sent to the invitee's email.
     goods-no-permission-desc: Invitation slots are open to eligible users only. You currently do not meet the purchase conditions.
     no-permission-hint: You do not have permission to purchase this goods. Please contact the administrator if you have any questions.
+    view-full-desc: Click to view full description ↓
     email: Invitee's email
     email-help: The invitee's email will be linked to the forum's registered email.
     remark: remark

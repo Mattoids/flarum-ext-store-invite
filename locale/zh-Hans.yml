@@ -49,6 +49,7 @@ mattoid-store-invite:
     goods-desc: 申请邀请名额，填写受邀人信息并通过审核后，邀请码将发送至受邀人邮箱。
     goods-no-permission-desc: 邀请名额面向符合条件的用户开放，您当前不满足购买条件。
     no-permission-hint: 您当前没有购买该商品的权限，如有疑问请联系管理员。
+    view-full-desc: 点击查看完整介绍 ↓
     email: 受邀人邮箱
     email-help: 受邀人邮箱将与论坛注册邮箱绑定。
     remark: 留言
