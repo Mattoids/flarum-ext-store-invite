@@ -40,13 +40,14 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
   // 邮件模板设置注册到 fof/pretty-mail 的设置页：
   // pretty-mail 使用标准 ExtensionPage，任何扩展都可向其注入设置项。
   // 设置键保持不变（mattoid-store-invite.mail*），后端无需改动。
+  // priority 取负值，让两个字段排在 pretty-mail 自带模板编辑器之上，避免沉底。
   app.extensionData.for('fof-pretty-mail')
     .registerSetting({
       setting: 'mattoid-store-invite.mail.title',
       label: app.translator.trans('mattoid-store-invite.admin.settings.mail-title-pretty'),
       help: app.translator.trans('mattoid-store-invite.admin.settings.mail-title-help'),
       type: 'text'
-    })
+    }, -10)
     .registerSetting({
       setting: 'mattoid-store-invite.mail',
       label: app.translator.trans('mattoid-store-invite.admin.settings.mail-pretty'),
@@ -54,5 +55,5 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
       placeholder: app.translator.trans('mattoid-store-invite.admin.settings.mail-template'),
       type: 'textarea',
       rows: 5
-    });
+    }, -10);
 });
