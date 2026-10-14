@@ -48,10 +48,10 @@ export default class InviteBuyForm extends Component {
           }} disabled={this.loading}/>
         </div>
 
-        <div className="Form-group center">
+        <div className="Form-group center StoreInvite-BuySubmit">
           <Button
             type="submit"
-            className="Button Button--primary"
+            className="Button Button--primary Button--block"
             loading={this.loading}
             disabled={!canBuy}
           >
