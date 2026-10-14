@@ -121,17 +121,17 @@ export default function settingsFields(page) {
       </div>
 
       <div className="StoreInviteAdmin-section">{t('section-mail')}</div>
-      <div className="StoreInviteAdmin-row StoreInviteAdmin-row--2">
-        <div className="StoreInviteAdminField">
+      <div className="StoreInviteAdmin-row">
+        <div className="StoreInviteAdminField StoreInviteAdminField--autoReviewUser">
           <label>{t('mail-title')}</label>
           <div className="helpText">{t('mail-title-help')}</div>
           <input className="FormControl" type="text" bidi={setting('mail.title')}/>
         </div>
-        <div className="StoreInviteAdminField">
-          <label>{t('mail')}</label>
-          <div className="helpText">{t('mail-help')}</div>
-          <textarea className="FormControl" rows={5} placeholder={t('mail-template')} bidi={setting('mail')}/>
-        </div>
+      </div>
+      <div className="StoreInviteAdminField">
+        <label>{t('mail')}</label>
+        <div className="helpText">{t('mail-help')}</div>
+        <textarea className="FormControl" rows={5} placeholder={t('mail-template')} bidi={setting('mail')}/>
       </div>
     </div>
   );
