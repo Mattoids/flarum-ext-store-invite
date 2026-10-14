@@ -30,6 +30,7 @@ mattoid-store-invite:
 
   forum:
     title: Invite
+    goods-desc: Apply for an invitation slot. Fill in the invitee's information and once approved, the invite code will be sent to the invitee's email.
     email: Invitee's email
     email-help: The invitee's email will be linked to the forum's registered email.
     remark: remark

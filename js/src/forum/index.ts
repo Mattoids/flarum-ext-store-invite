@@ -3,6 +3,8 @@ import app from 'flarum/forum/app';
 import {extend} from 'flarum/common/extend';
 import InvitePage from "./components/page/InvitePage";
 import MyInvitePage from "./components/page/MyInvitePage";
+import InviteGoodsCard from "./components/store/InviteGoodsCard";
+import InviteBuyModal from "./components/store/InviteBuyModal";
 import UserPage from 'flarum/forum/components/UserPage';
 import IndexPage from 'flarum/forum/components/IndexPage';
 import LinkButton from 'flarum/common/components/LinkButton';
@@ -16,6 +18,13 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
     path: '/u/:username/invite',
     component: MyInvitePage,
   };
+
+  // 主动注册到商店插件的商品组件注册表（详见 flarum-ext-store 开发手册 5.1 节）
+  const registry = (app as any).storeRegistry;
+  if (registry) {
+    registry.item.register('invite', InviteGoodsCard);
+    registry.priceModal.register('invite', InviteBuyModal);
+  }
 
   extend(UserPage.prototype, 'navItems', function (items) {
     items.add('myInvitePage', LinkButton.component({

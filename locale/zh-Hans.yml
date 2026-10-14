@@ -34,6 +34,7 @@ mattoid-store-invite:
 
   forum:
     title: 邀请码
+    goods-desc: 申请邀请名额，填写受邀人信息并通过审核后，邀请码将发送至受邀人邮箱。
     email: 受邀人邮箱
     email-help: 受邀人邮箱将与论坛注册邮箱绑定。
     remark: 留言
