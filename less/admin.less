@@ -51,3 +51,14 @@
     max-width: 320px;
   }
 }
+
+/*
+ * 扩展图标背景图适配。
+ * Flarum 核心的 .ExtensionIcon 未设置 background-size，图片类图标（composer.json icon.image）
+ * 在 25~90px 的图标位上只显示原图左上角一块切片——本插件的 logo 四角留白，切片呈空白。
+ * 统一改为 cover + 居中，使图片类图标在任何尺寸下完整呈现。
+ */
+.ExtensionIcon {
+  background-size: cover;
+  background-position: center;
+}
