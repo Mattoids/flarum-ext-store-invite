@@ -17,6 +17,12 @@ mattoid-store-invite:
       goods-no-permission-desc: Goods description (without purchase permission)
       goods-no-permission-desc-help: Description shown to users without purchase permission (store goods card and modal)
       goods-desc-hint: The goods description of the invite goods is managed by this extension's settings (the two "Goods description" fields above); the default description field is no longer shown in the store modal.
+
+      section-goods: Goods Description
+      section-limit: Cooling-off & Validity
+      section-buy: Purchase & Review Display
+      section-switch: Feature Switches
+      section-mail: Mail Template
       price: Deduction of fees
       price-help: Deduction of funds upon approval
       mail: Email template

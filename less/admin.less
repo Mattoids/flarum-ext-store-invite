@@ -1,0 +1,53 @@
+
+/* 管理端设置页分组布局 */
+.StoreInviteAdmin {
+  .StoreInviteAdmin-section {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--control-bg);
+  }
+
+  .StoreInviteAdmin-section:first-child {
+    margin-top: 0;
+  }
+
+  .StoreInviteAdmin-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .StoreInviteAdmin-row .StoreInviteAdminField {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  /* 开关行：等宽排列，允许换行 */
+  .StoreInviteAdmin-row--switches {
+    flex-wrap: wrap;
+  }
+
+  .StoreInviteAdmin-row--switches .StoreInviteAdminSwitch {
+    flex: 1 1 200px;
+    min-width: 180px;
+    margin-bottom: 8px;
+  }
+
+  .StoreInviteAdminField {
+    label {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .helpText {
+      margin-bottom: 4px;
+    }
+  }
+
+  .StoreInviteAdminField--autoReviewUser {
+    max-width: 320px;
+  }
+}

@@ -17,6 +17,12 @@ mattoid-store-invite:
       goods-no-permission-desc: 商品描述（无购买权限）
       goods-no-permission-desc-help: 展示给无购买权限用户的商品描述（商店商品卡片与弹窗）
       goods-desc-hint: 邀请商品的商品描述由本拓展设置项管理（上方"商品描述"两项），商店弹窗中不再提供默认描述字段。
+
+      section-goods: 商品描述
+      section-limit: 冷静期与有效期
+      section-buy: 购买与审核展示
+      section-switch: 功能开关
+      section-mail: 邮件模板
       price: 扣费
       price-help: 审核通过时扣除资金
       mail: 邮件模板
