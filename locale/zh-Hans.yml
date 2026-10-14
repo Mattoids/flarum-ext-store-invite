@@ -28,9 +28,7 @@ mattoid-store-invite:
       mail-help: 发送给受邀人的邮件内容
       mail-title: 邮件标题
       mail-title-help: 受邀人收到邮件的标题内容
-      mail-title-pretty: 邀请插件 - 邮件标题
-      mail-pretty: 邀请插件 - 邮件内容模板
-      mail-section-pretty: 邀请插件（Store Invite）邮件模板
+      section-mail: 邮件模板
       inconsistency-username: 验证用户名
       inconsistency-username-help: 受邀人用户名必须与注册用户名一致
       inconsistency-email: 验证邮箱

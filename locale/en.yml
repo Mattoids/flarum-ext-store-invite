@@ -28,9 +28,7 @@ mattoid-store-invite:
       mail-help: Email content sent to invitees
       mail-title: Email Title
       mail-title-help: The invitee receives the title content of the email
-      mail-title-pretty: Store Invite - Mail Title
-      mail-pretty: Store Invite - Mail Template
-      mail-section-pretty: Store Invite Mail Template
+      section-mail: Mail Template
       auto-review: Automatic review passed
       auto-review-help: After checking, the system will automatically pass and complete the review operation
       auto-review-username: Automatically review users
