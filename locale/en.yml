@@ -22,13 +22,14 @@ mattoid-store-invite:
       section-limit: Cooling-off & Validity
       section-buy: Purchase & Review Display
       section-switch: Feature Switches
-      section-mail: Mail Template
       price: Deduction of fees
       price-help: Deduction of funds upon approval
       mail: Email template
       mail-help: Email content sent to invitees
       mail-title: Email Title
       mail-title-help: The invitee receives the title content of the email
+      mail-title-pretty: Store Invite - Mail Title
+      mail-pretty: Store Invite - Mail Template
       auto-review: Automatic review passed
       auto-review-help: After checking, the system will automatically pass and complete the review operation
       auto-review-username: Automatically review users

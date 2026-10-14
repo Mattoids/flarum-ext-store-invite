@@ -119,18 +119,6 @@ export default function settingsFields(page) {
           <textarea className="FormControl" rows={3} bidi={setting('goods-no-permission-desc')}/>
         </div>
       </div>
-
-      <div className="StoreInviteAdmin-section">{t('section-mail')}</div>
-      <div className="StoreInviteAdminField">
-        <label>{t('mail-title')}</label>
-        <div className="helpText">{t('mail-title-help')}</div>
-        <input className="FormControl" type="text" bidi={setting('mail.title')}/>
-      </div>
-      <div className="StoreInviteAdminField">
-        <label>{t('mail')}</label>
-        <div className="helpText">{t('mail-help')}</div>
-        <textarea className="FormControl" rows={5} placeholder={t('mail-template')} bidi={setting('mail')}/>
-      </div>
     </div>
   );
 }
