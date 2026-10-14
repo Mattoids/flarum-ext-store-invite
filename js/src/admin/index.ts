@@ -1,9 +1,17 @@
 import app from 'flarum/admin/app';
 import Stream from "flarum/common/utils/Stream";
 import Select from 'flarum/common/components/Select';
+import InviteGoodsForm from "./components/InviteGoodsForm";
 
 app.initializers.add('mattoid/flarum-ext-store-invite', () => {
   let options: any[] = [];
+
+  // 主动注册到商店插件的管理端组件注册表：
+  // 注册后商店"添加/编辑商品"弹窗不再显示默认"商品描述"字段（描述由本拓展设置项管理）
+  const adminRegistry = (app as any).storeAdminRegistry;
+  if (adminRegistry) {
+    adminRegistry.goodsForm.register('invite', InviteGoodsForm);
+  }
 
   app.extensionData.for("mattoid-store-invite")
     .registerSetting(function () {
@@ -13,6 +21,20 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
         }
         options[group.id()] = group.nameSingular();
       });
+    })
+    .registerSetting({
+      setting: 'mattoid-store-invite.goods-desc',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.goods-desc-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.goods-desc'),
+      type: 'textarea',
+      rows: 3
+    })
+    .registerSetting({
+      setting: 'mattoid-store-invite.goods-no-permission-desc',
+      help: app.translator.trans('mattoid-store-invite.admin.settings.goods-no-permission-desc-help'),
+      label: app.translator.trans('mattoid-store-invite.admin.settings.goods-no-permission-desc'),
+      type: 'textarea',
+      rows: 3
     })
     .registerSetting({
       setting: 'mattoid-store-invite.show-index',

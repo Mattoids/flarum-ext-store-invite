@@ -11,6 +11,12 @@ mattoid-store-invite:
       invite-validity-period-help: After the review is approved, verification codes that exceed the time limit will automatically become invalid
       show-index: Add to homepage
       show-index-help: Display the review menu on the homepage
+      goods-desc-section: Goods Description
+      goods-desc: Goods description (with purchase permission)
+      goods-desc-help: Description shown to users who have purchase permission (store goods card and buy modal)
+      goods-no-permission-desc: Goods description (without purchase permission)
+      goods-no-permission-desc-help: Description shown to users without purchase permission (store goods card and modal)
+      goods-desc-hint: The goods description of the invite goods is managed by this extension's settings (the two "Goods description" fields above); the default description field is no longer shown in the store modal.
       price: Deduction of fees
       price-help: Deduction of funds upon approval
       mail: Email template
@@ -31,6 +37,8 @@ mattoid-store-invite:
   forum:
     title: Invite
     goods-desc: Apply for an invitation slot. Fill in the invitee's information and once approved, the invite code will be sent to the invitee's email.
+    goods-no-permission-desc: Invitation slots are open to eligible users only. You currently do not meet the purchase conditions.
+    no-permission-hint: You do not have permission to purchase this goods. Please contact the administrator if you have any questions.
     email: Invitee's email
     email-help: The invitee's email will be linked to the forum's registered email.
     remark: remark

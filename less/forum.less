@@ -144,6 +144,29 @@
   color: var(--error-color, #d93026);
 }
 
+/* 无权限状态的商品卡片 */
+.StoreInvite-GoodsCard--noPermission {
+  .itemTitle,
+  .StoreItem-desc {
+    color: var(--muted-color);
+  }
+}
+
+/* 无权限弹窗内容 */
+.StoreInvite-NoPermission {
+  text-align: center;
+
+  .StoreInvite-NoPermission-icon img {
+    max-width: 96px;
+    margin-bottom: 10px;
+  }
+
+  .StoreInvite-NoPermission-desc {
+    white-space: pre-line;
+    margin-bottom: 10px;
+  }
+}
+
 .red {
   color: red;
 }

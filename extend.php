@@ -64,7 +64,9 @@ return [
 
     (new Extend\Settings())
         ->serializeToForum('postNum', 'mattoid-store-invite.post-num')
-        ->serializeToForum('inviteShowIndex', 'mattoid-store-invite.show-index'),
+        ->serializeToForum('inviteShowIndex', 'mattoid-store-invite.show-index')
+        ->serializeToForum('inviteGoodsDesc', 'mattoid-store-invite.goods-desc')
+        ->serializeToForum('inviteGoodsNoPermissionDesc', 'mattoid-store-invite.goods-no-permission-desc'),
 
     (new Extend\Routes('api'))
         ->get('/store/invite/list', 'store.invite.list', ListInviteApplyController::class)

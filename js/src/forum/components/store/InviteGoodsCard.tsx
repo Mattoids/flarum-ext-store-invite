@@ -1,10 +1,14 @@
 import app from 'flarum/forum/app';
 import Component from 'flarum/common/Component';
-import InviteBuyModal from './InviteBuyModal';
+import InvitePriceModal from './InvitePriceModal';
 
 /**
  * 商店页商品卡片（注册到 app.storeRegistry.item，code = invite）
  * 替换商店插件默认的 StoreItem 展示。
+ *
+ * 按购买权限展示不同内容：
+ *  - 有权限（canInviteView）：显示有权限商品描述
+ *  - 无权限：显示无权限商品描述（样式上追加 StoreInvite-GoodsCard--noPermission）
  *
  * attrs:
  *  - item: 商店商品模型（store 行的 store 模型）
@@ -20,6 +24,29 @@ export default class InviteGoodsCard extends Component {
     this.storeData.id = this.attrs.item.id;
   }
 
+  /**
+   * 当前用户是否拥有邀请商品购买权限
+   */
+  canBuyInvite(): boolean {
+    const user = app.session.user;
+    if (!user) {
+      return false;
+    }
+    return !!user.attribute('canInviteView');
+  }
+
+  /**
+   * 按权限取商品描述：后台设置的描述优先，未设置时回退默认文案
+   */
+  goodsDesc(): string {
+    if (this.canBuyInvite()) {
+      return app.forum.attribute('inviteGoodsDesc')
+        || app.translator.trans('mattoid-store-invite.forum.goods-desc');
+    }
+    return app.forum.attribute('inviteGoodsNoPermissionDesc')
+      || app.translator.trans('mattoid-store-invite.forum.goods-no-permission-desc');
+  }
+
   view() {
     const moneyName = app.forum.attribute('antoinefr-money.moneyname') || '[money]';
     const price = this.storeData.price > 0
@@ -27,9 +54,10 @@ export default class InviteGoodsCard extends Component {
       : app.translator.trans('mattoid-store.forum.free');
     const discountPrice = moneyName.replace('[money]', this.storeData.discountPrice);
     const isVideo = this.storeData.icon && this.storeData.icon.slice(-5) === '.webm';
+    const canBuy = this.canBuyInvite();
 
     return (
-      <div id={'goods' + this.storeData.id} className="StoreItem StoreInvite-GoodsCard" onclick={() => this.showDetails()}>
+      <div id={'goods' + this.storeData.id} className={'StoreItem StoreInvite-GoodsCard' + (canBuy ? '' : ' StoreInvite-GoodsCard--noPermission')} onclick={() => this.showDetails()}>
         <div className="itemTitle">
           {this.storeData.title}
         </div>
@@ -40,7 +68,7 @@ export default class InviteGoodsCard extends Component {
           </video>
         </div>
         <div className="StoreItem-desc StoreInvite-GoodsCard-desc">
-          {app.translator.trans('mattoid-store-invite.forum.goods-desc')}
+          {this.goodsDesc()}
         </div>
         <div className="StoreItem-footer">
           <div className="StoreItem-priceGroup">
@@ -65,7 +93,7 @@ export default class InviteGoodsCard extends Component {
 
   showDetails() {
     if (app.session.user) {
-      app.modal.show(InviteBuyModal, {storeData: this.storeData, onSuccess: this.attrs.onSuccess});
+      app.modal.show(InvitePriceModal, {storeData: this.storeData, onSuccess: this.attrs.onSuccess});
     }
   }
 }
