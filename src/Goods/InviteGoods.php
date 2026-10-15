@@ -11,6 +11,8 @@ class InviteGoods extends Goods
     public $uri = '/store/buy/invite';
     public $method = 'POST';
     public $className = 'store-buy Modal--small';
+    // 邀请码购买后直接生效，不允许被使用、不进背包
+    public $usable = false;
     public $popUp = [
         [
             'label' => 'mattoid-store-invite.forum.email',
