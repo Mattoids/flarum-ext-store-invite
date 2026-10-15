@@ -37,6 +37,9 @@ app.initializers.add('mattoid/flarum-ext-store-invite', () => {
   });
 
   extend(IndexPage.prototype, 'navItems', function (items) {
+    if (!app.session.user) {
+      return;
+    }
     if (!app.session.user.attribute('canInviteAdminView') || app.forum.attribute("inviteShowIndex") == 0) {
       return false;
     }
